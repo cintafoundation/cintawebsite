@@ -1,0 +1,107 @@
+{
+  "bb-hero.jpg": {
+    "w": 1280,
+    "h": 720,
+    "bytes": 200068
+  },
+  "bb-week1.jpg": {
+    "w": 810,
+    "h": 1440,
+    "bytes": 190219
+  },
+  "bb-week2.jpg": {
+    "w": 1440,
+    "h": 811,
+    "bytes": 217182
+  },
+  "bb-week3.jpg": {
+    "w": 1280,
+    "h": 720,
+    "bytes": 180886
+  },
+  "jb-2.jpg": {
+    "w": 652,
+    "h": 744,
+    "bytes": 91479
+  },
+  "jb-3.jpg": {
+    "w": 666,
+    "h": 962,
+    "bytes": 113804
+  },
+  "jb-hero.jpg": {
+    "w": 652,
+    "h": 744,
+    "bytes": 90651
+  },
+  "jb31-clean.jpg": {
+    "w": 656,
+    "h": 852,
+    "bytes": 73710
+  },
+  "jb31-hero.jpg": {
+    "w": 656,
+    "h": 960,
+    "bytes": 116893
+  },
+  "jb31-ojol.jpg": {
+    "w": 644,
+    "h": 832,
+    "bytes": 61121
+  },
+  "jb31-prep.jpg": {
+    "w": 656,
+    "h": 716,
+    "bytes": 61767
+  },
+  "jumat-berkah-1.webp": {
+    "w": 652,
+    "h": 1148,
+    "bytes": 119156
+  },
+  "jumat-berkah-1.jpg": {
+    "w": 652,
+    "h": 1148,
+    "bytes": 136809
+  },
+  "jumat-berkah-2.webp": {
+    "w": 652,
+    "h": 1148,
+    "bytes": 108228
+  },
+  "jumat-berkah-2.jpg": {
+    "w": 652,
+    "h": 1148,
+    "bytes": 123979
+  },
+  "logo-cream.png": {
+    "w": 442,
+    "h": 384,
+    "bytes": 7720
+  },
+  "logo-wine.png": {
+    "w": 442,
+    "h": 384,
+    "bytes": 6440
+  },
+  "qris-cinta-foundation.png": {
+    "w": 1086,
+    "h": 1535,
+    "bytes": 540275
+  },
+  "qris-code.png": {
+    "w": 542,
+    "h": 548,
+    "bytes": 202866
+  },
+  "og-cover.jpg": {
+    "w": 1200,
+    "h": 630,
+    "bytes": 27035
+  },
+  "favicon.png": {
+    "w": 180,
+    "h": 180,
+    "bytes": 13051
+  }
+}

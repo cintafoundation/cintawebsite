@@ -1,0 +1,91 @@
+/* Cinta Foundation — shared styles.
+   Base block is verbatim from the design source's <helmet> style tag.
+   Everything below it reproduces state and hover styling that the Claude Design
+   runtime used to compute into inline `style` attributes at render time. */
+
+html, body { margin: 0; padding: 0; background: #F7F3EC; }
+body { font-family: 'Poppins', sans-serif; color: #2A1820; }
+a { color: #7B2F4D; }
+a:hover { color: #5E1F39; }
+* { box-sizing: border-box; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes drift { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(2%,3%) scale(1.06); } 100% { transform: translate(0,0) scale(1); } }
+@keyframes drawerIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #7B2F4D; outline-offset: 3px; }
+input::placeholder { color: rgba(42,24,32,0.4); }
+
+/* ---------------------------------------------------------------- hover
+   `!important` is required: the design source carries its base appearance in
+   inline `style` attributes, which otherwise outrank any stylesheet rule. */
+
+.hv-fill:hover  { background: #7B2F4D !important; color: #F7F3EC !important; border-color: #7B2F4D !important; }
+.hv-deep:hover  { background: #5E1F39 !important; }
+.hv-blush:hover { background: #F3E4E8 !important; }
+.hv-rose:hover  { color: #C97D90 !important; }
+.hv-wine:hover  { color: #7B2F4D !important; }
+.hv-deeptext:hover { color: #5E1F39 !important; }
+.hv-tint:hover  { background: rgba(243,228,232,0.6) !important; }
+.hv-soft:hover  { border-color: #7B2F4D !important; background: rgba(243,228,232,0.6) !important; }
+.hv-nav:hover   { background: rgba(243,228,232,0.9) !important; color: #5E1F39 !important; }
+.hv-ul:hover    { border-bottom-color: #7B2F4D !important; }
+.hv-lift:hover  { transform: translateY(-8px) !important; box-shadow: 0 24px 44px -20px rgba(94,31,57,0.4) !important; }
+
+/* Links standing in for the source's <button> navigation. */
+.as-btn { text-decoration: none; }
+
+/* ---------------------------------------------------------------- layout
+   The source switched these on a JS `isMobile` flag (window.innerWidth < 768).
+   Here the same breakpoint is expressed in CSS so both variants ship in HTML. */
+
+@media (max-width: 767.98px) {
+  .hdr-desktop { display: none !important; }
+  .facts-grid  { grid-template-columns: 1fr; }
+  .bb-week     { grid-template-columns: 1fr; }
+}
+@media (min-width: 768px) {
+  .hdr-mobile  { display: none !important; }
+  .mobile-menu, .mobile-menu.is-on { display: none !important; }
+  .facts-grid  { grid-template-columns: repeat(3, 1fr); }
+  .bb-week     { grid-template-columns: 150px 1fr; }
+}
+
+.mobile-menu { display: none; }
+.mobile-menu.is-on { display: flex; }
+body.menu-open { overflow: hidden; }
+
+/* ------------------------------------------------------- interactive state
+   Collapsed panels are present in the HTML and hidden with CSS — never
+   injected on click — so crawlers still read the copy. */
+
+.don-tab { background: transparent; color: #7B2F4D; border: 1px solid rgba(123,47,77,0.25); font-weight: 400; }
+.don-tab[aria-selected="true"] { background: #7B2F4D; color: #F7F3EC; border-color: #7B2F4D; font-weight: 500; }
+.don-panel:not(.is-on) { display: none !important; }
+
+.lap-filter { background: transparent; color: #7B2F4D; border: 1px solid rgba(123,47,77,0.3); font-weight: 400; }
+.lap-filter[aria-selected="true"] { background: #7B2F4D; color: #F7F3EC; border-color: #7B2F4D; font-weight: 500; }
+.feed-item.is-hidden { display: none !important; }
+.feed-empty:not(.is-on) { display: none !important; }
+
+.faq { border: 1px solid rgba(200,160,99,0.35); border-radius: 20px; transition: all 0.25s ease; background: rgba(247,243,236,0.5); }
+.faq[open] { background: #F3E4E8; }
+.faq > summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 26px; cursor: pointer; text-align: left; }
+.faq > summary::-webkit-details-marker { display: none; }
+.faq-q { font-family: 'Lora', serif; font-weight: 500; font-size: 18px; color: #5E1F39; line-height: 1.4; }
+.faq-chev { font-family: 'Lora', serif; font-size: 26px; color: #C8A063; line-height: 1; transition: transform 0.25s ease; flex-shrink: 0; }
+.faq[open] .faq-chev { transform: rotate(45deg); }
+.faq-a { font-weight: 300; font-size: 15px; line-height: 1.8; color: #2A1820; padding: 0 26px 26px; max-width: 640px; }
+
+.rail-step { color: rgba(42,24,32,0.4); font-weight: 300; }
+.rail-step[data-state="done"]   { color: #A0793F; font-weight: 400; }
+.rail-step[data-state="active"] { color: #7B2F4D; font-weight: 500; }
+
+.t-step:not(.is-on) { display: none !important; }
+.t-chip { background: rgba(247,243,236,0.8); color: #7B2F4D; border: 1.5px solid rgba(123,47,77,0.35); font-weight: 400; }
+.t-chip[aria-pressed="true"] { background: #7B2F4D; color: #F7F3EC; border-color: #7B2F4D; font-weight: 500; }
+.t-option { background: rgba(247,243,236,0.6); border: 1.5px solid rgba(200,160,99,0.45); }
+.t-option[aria-pressed="true"] { background: rgba(247,243,236,0.95); border-color: #7B2F4D; }
+.flow-nav.is-off, .flow-back.is-off { display: none !important; }
+
+/* The archive filter row hides its scrollbar, as in the source. */
+.filter-rail::-webkit-scrollbar { display: none; }

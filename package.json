@@ -1,0 +1,14 @@
+{
+  "name": "cinta-foundation-site",
+  "private": true,
+  "type": "module",
+  "description": "Static build for the Cinta Foundation website. Output in dist/ is plain HTML/CSS — the host needs no build step.",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "serve": "node build/serve.mjs",
+    "serve:reference": "node build/serve-ref.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}

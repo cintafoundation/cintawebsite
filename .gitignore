@@ -1,0 +1,12 @@
+# Build dependency — restored with `npm install`
+node_modules/
+
+# Scratch
+.tmp
+.tmp/
+
+# macOS
+.DS_Store
+
+# Stale zip of dist/ — the real thing is committed
+Archive.zip
