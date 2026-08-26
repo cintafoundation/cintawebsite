@@ -11,23 +11,37 @@ No framework, no build step on the host.
 ## Deploy
 
 ```sh
-npm install                                    # once — pulls sharp for the image pass
-node build/build.mjs --domain=cintafoundation.org
+npm install    # once — pulls sharp for the image pass
+npm run build  # domain is pinned in package.json
 ```
 
 Then upload `dist/` to Netlify, Vercel, Cloudflare Pages, or GitHub Pages.
 All four serve `dist/program/index.html` at `/program` with no configuration.
 For Cloudflare Pages: build command empty, output directory `dist`.
 
-**Domain: `cintafoundation.org`** — confirmed and applied. A bare
-`node build/build.mjs` still emits `DOMAIN_PLACEHOLDER` and prints a warning, so
-either pass `--domain=` as above or rewrite an existing build in place:
+**Domain: `www.cintafoundation.org`.** The site is served from the `www`
+hostname on Cloudflare Pages. The apex `cintafoundation.org` still points at an
+old Wix site and must never appear in a canonical, `og:url`, or sitemap entry —
+Google would follow it there and never index this build.
+
+`npm run build` pins `--domain=www.cintafoundation.org` so an accidental bare
+build cannot fall back to placeholders. A bare `node build/build.mjs` still
+emits `DOMAIN_PLACEHOLDER` and warns.
+
+Two greps must both come back empty before deploy:
 
 ```sh
-./set-domain.sh cintafoundation.org
+grep -rn "https://cintafoundation.org" dist/   # apex leaked into a URL
+grep -rn DOMAIN_PLACEHOLDER dist/              # unresolved build
 ```
 
-Either way, `grep -r DOMAIN_PLACEHOLDER dist` must return nothing before deploy.
+The plain-text email `admin@cintafoundation.org` and the footer's `cintafoundation.org`
+wordmark are design copy, not URLs — they stay on the apex and are expected.
+
+`./set-domain.sh <host>` only substitutes `DOMAIN_PLACEHOLDER`; it cannot
+re-point a build whose domain is already resolved, and now exits non-zero
+saying so rather than reporting a misleading success. **To change domains,
+rebuild from source.**
 
 > Links are root-absolute (`/program`). Deploy at a domain root or a custom
 > domain — a GitHub Pages *project* path (`user.github.io/repo/`) would break them.

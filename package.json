@@ -4,7 +4,7 @@
   "type": "module",
   "description": "Static build for the Cinta Foundation website. Output in dist/ is plain HTML/CSS — the host needs no build step.",
   "scripts": {
-    "build": "node build/build.mjs",
+    "build": "node build/build.mjs --domain=www.cintafoundation.org",
     "serve": "node build/serve.mjs",
     "serve:reference": "node build/serve-ref.mjs"
   },
