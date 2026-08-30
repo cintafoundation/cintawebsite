@@ -79,7 +79,7 @@ const SITE = [
   {
     file: 'program/index.html', url: '/program', nav: 'program',
     title: 'Program & Inisiatif — Cinta Foundation',
-    description: 'Lima pilar program Cinta Foundation, dari Jumat Berkah setiap pekan hingga Barakah Bazaar. Cara kami menerjemahkan cinta jadi tindakan.',
+    description: 'Lima pilar program Cinta Foundation, dari Jumat Berkah dua pekan sekali hingga Barakah Bazaar. Cara kami menerjemahkan cinta jadi tindakan.',
     lastmod: BUILD_DATE, body: pages.program
   },
   {
