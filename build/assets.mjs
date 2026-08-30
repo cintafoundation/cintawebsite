@@ -2,7 +2,7 @@
 // PNG is kept only where transparency / scan fidelity matters (logos, QRIS).
 // The two large photographic PNGs become WebP with a JPEG fallback.
 import sharp from 'sharp';
-import { mkdir, readdir, writeFile, stat } from 'node:fs/promises';
+import { mkdir, readdir, writeFile, stat, copyFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const SRC = path.resolve(process.argv[2] ?? 'src-assets');
@@ -15,6 +15,11 @@ const MAX_EDGE = 1440;
 
 // Photographic PNGs -> webp + jpeg fallback (no transparency needed).
 const PHOTO_PNGS = new Set(['jumat-berkah-1.png', 'jumat-berkah-2.png']);
+// Already optimised upstream (WebP + JPG, progressive, q88/82) and delivered
+// with fixed filenames. Copied byte-for-byte: re-encoding would only lose
+// quality, and the 1447px landscapes would trip the resize cap below.
+const PREOPTIMISED = /^jumat-berkah-28agu-/;
+
 // Keep as PNG for transparency.
 const KEEP_PNG = new Set(['logo-cream.png', 'logo-wine.png']);
 // QRIS codes: recompressed losslessly only — never quantised, resized, or
@@ -31,10 +36,18 @@ async function record(name, file) {
 
 async function run() {
   await mkdir(OUT, { recursive: true });
-  const files = (await readdir(SRC)).filter((f) => /\.(jpe?g|png)$/i.test(f)).sort();
+  const files = (await readdir(SRC)).filter((f) => /\.(jpe?g|png|webp)$/i.test(f)).sort();
 
   for (const f of files) {
     const from = path.join(SRC, f);
+
+    if (PREOPTIMISED.test(f)) {
+      const to = path.join(OUT, f);
+      await copyFile(from, to);
+      await record(f, to);
+      continue;
+    }
+
     const img = sharp(from, { unlimited: true });
     const meta = await img.metadata();
     const longest = Math.max(meta.width, meta.height);

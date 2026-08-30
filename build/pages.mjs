@@ -64,7 +64,7 @@ export function beranda() {
         <div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(52% 46% at 50% 18%, rgba(243,228,232,0.95) 0%, rgba(243,228,232,0) 100%), radial-gradient(30% 30% at 82% 68%, rgba(200,160,99,0.16) 0%, rgba(200,160,99,0) 100%), radial-gradient(26% 30% at 12% 60%, rgba(201,125,144,0.14) 0%, rgba(201,125,144,0) 100%); animation: drift 14s ease-in-out infinite;"></div>
         <div style="position: relative; max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 30px;">
           <h1 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(48px, 8vw, 88px); line-height: 1.04; letter-spacing: -0.015em; color: #5E1F39; margin: 0; text-wrap: balance; animation: fadeUp 0.7s ease 0.12s both;">Ada banyak cara<br><em style="font-style: italic; color: #7B2F4D;">mencintai.</em></h1>
-          <p style="font-family: 'Lora', serif; font-style: italic; font-size: clamp(17px, 2vw, 21px); line-height: 1.65; color: #2A1820; max-width: 600px; margin: 0; text-wrap: pretty; animation: fadeUp 0.7s ease 0.24s both;">Di sini, cinta disalurkan dalam bentuk makanan setiap Jumat, dukungan dan pemberdayaan anak dan perempuan, serta kepekaan untuk hadir saat dibutuhkan.</p>
+          <p style="font-family: 'Lora', serif; font-style: italic; font-size: clamp(17px, 2vw, 21px); line-height: 1.65; color: #2A1820; max-width: 600px; margin: 0; text-wrap: pretty; animation: fadeUp 0.7s ease 0.24s both;">Di sini, cinta disalurkan dalam bentuk makanan hangat dua pekan sekali di hari Jumat, dukungan dan pemberdayaan anak dan perempuan, serta kepekaan untuk hadir saat dibutuhkan.</p>
           <a class="as-btn hv-deep" href="/program" style="margin-top: 10px; font-family: 'Poppins', sans-serif; font-size: 14.5px; font-weight: 500; color: #F7F3EC; background: #7B2F4D; border: 0; padding: 17px 38px; border-radius: 999px; cursor: pointer; letter-spacing: 0.03em; transition: background 0.2s ease; animation: fadeUp 0.7s ease 0.36s both;">Kenali Cara Kami →</a>
         </div>
       </section>
@@ -693,6 +693,17 @@ function blocks(list) {
     if (b.isPara) return `<p style="font-weight: 300; font-size: 16px; line-height: 1.85; color: #2A1820; margin: 0; text-wrap: pretty;">${segments(b.segs)}</p>`;
     if (b.isH2) return `<h2 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(23px, 3vw, 30px); line-height: 1.22; color: #5E1F39; margin: 22px 0 0; text-wrap: pretty;">${esc(b.text)}</h2>`;
     if (b.isQuote) return `<div style="margin: 14px 0; padding: 26px 30px; background: #F3E4E8; border-radius: 22px; font-family: 'Lora', serif; font-style: italic; font-size: clamp(18px, 2.1vw, 21px); line-height: 1.6; color: #7B2F4D; text-wrap: pretty;">${esc(b.text)}</div>`;
+    if (b.isPhoto) {
+      // Explicit width/height on the <img> so the box is reserved before the
+      // file lands; the cover is eager, the two below it lazy.
+      return `<figure style="margin: 14px 0; display: flex; flex-direction: column; gap: 8px;">
+                    <picture style="display: block; width: 100%; max-width: ${b.maxW};">
+                      <source srcset="${A(b.name + '.webp')}" type="image/webp">
+                      <img src="${A(b.name + '.jpg')}" alt="${esc(b.alt)}" width="${b.w}" height="${b.h}"${b.eager ? '' : ' loading="lazy"'} decoding="async" style="width: 100%; height: auto; display: block; border-radius: 22px;">
+                    </picture>
+                    <figcaption style="font-weight: 300; font-size: 12.5px; line-height: 1.6; color: #74656A; max-width: ${b.maxW};">${esc(b.caption)}</figcaption>
+                  </figure>`;
+    }
     if (b.isFigure) {
       const maxW = b.maxW || '100%';
       return `<figure style="margin: 14px 0; display: flex; flex-direction: column; gap: 8px;">
@@ -704,8 +715,30 @@ function blocks(list) {
   }).join('\n                ');
 }
 
+/* A photo-led report: heading, then images and copy, and nothing after it.
+   The three earlier reports close with a Drive documentation panel; this one
+   deliberately has none. */
+function photoReport(rep, art) {
+  return `
+    <main style="flex: 1;">
+      <section style="padding: clamp(56px, 7vw, 88px) 32px clamp(72px, 9vw, 110px);">
+        <div style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+          <a class="hv-deeptext" href="/laporan" style="align-self: flex-start; font-family: 'Poppins', sans-serif; font-size: 13.5px; font-weight: 400; color: #7B2F4D; background: none; border: 0; padding: 0; cursor: pointer; letter-spacing: 0.02em; text-decoration: none;">← Laporan Kegiatan</a>
+          <div style="font-family: 'Poppins', sans-serif; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #A0793F;">${esc(rep.category)}</div>
+          <h1 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(32px, 4.6vw, 48px); line-height: 1.12; letter-spacing: -0.015em; color: #5E1F39; margin: 0; text-wrap: pretty;">${esc(rep.heading)}</h1>
+        </div>
+
+        <div style="max-width: 720px; margin: 32px auto 0; width: 100%; display: flex; flex-direction: column; gap: 22px;">
+                ${blocks(art.blocks)}
+        </div>
+      </section>
+    </main>
+`;
+}
+
 export function report(rep) {
   const art = ARTICLES[rep.article] || {};
+  if (art.layout === 'photo') return photoReport(rep, art);
   const heading = rep.heading || rep.title;
   const heroMaxW = art.heroMaxW || '100%';
   const heroRatio = art.heroRatio || '16 / 8.6';

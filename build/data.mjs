@@ -239,11 +239,45 @@ export const bbArticle = {
   docsLabel: 'Lihat dokumentasi Barakah Bazaar →'
 };
 
+// 28 Agustus 2026 — a photo-led report. Copy, captions and alt text are
+// verbatim from INSTRUKSI_CLAUDE_CODE_28_AGUSTUS.md and must not be reworded.
+// No documentation-link block: the public Drive folder is not curated yet, and
+// the instruction is explicit that it lands in a separate commit.
+export const jb28Article = {
+  layout: 'photo',
+  blocks: [
+    { isPhoto: true, name: 'jumat-berkah-28agu-cover', w: 1447, h: 1087, maxW: '640px', eager: true,
+      alt: 'Seorang relawan menyerahkan bungkus nasi kepada petugas kebersihan di tepi jalan kawasan Mega Kuningan',
+      caption: 'Pagi itu di Mega Kuningan, satu bungkus berpindah tangan di tepi jalan.' },
+    P('Jumat kemarin, sekitar pukul sembilan pagi, Jumat Berkah berjalan di kawasan Mega Kuningan, Jakarta Selatan.'),
+    { isPhoto: true, name: 'jumat-berkah-28agu-serah-terima', w: 941, h: 1672, maxW: '460px',
+      alt: 'Relawan menyerahkan nasi kotak dari tangan ke tangan, dengan pengemudi ojek daring menunggu di belakang',
+      caption: 'Nasi hangat dan snack ringan, dibagikan langsung dari tangan ke tangan.' },
+    P('Tiga belas porsi nasi hangat dan snack ringan kami bagikan pagi itu. Tidak terlalu banyak. Tapi cukup untuk menemani seseorang yang sedang atau baru selesai bekerja, dan untuk mereka yang pagi itu belum sempat sarapan.'),
+    { isPhoto: true, name: 'jumat-berkah-28agu-penerima-pagi', w: 646, h: 1158, maxW: '460px',
+      alt: 'Dua petugas berseragam menerima bungkus nasi sambil tersenyum',
+      caption: 'Sebagian penerima pagi itu adalah mereka yang sudah bekerja sejak subuh.' },
+    P('Jumat Berkah berjalan dua pekan sekali sejak Agustus 2025. Terima kasih untuk setiap nama yang ikut menitipkan rezekinya pekan ini. Sampai jumpa di Jumat Berkah berikutnya. Salam.')
+  ]
+};
+
 // ------------------------------------------------------------ report index
 // `url` null  => no standalone page (report still listed in the archive).
 // Ordered newest first, matching the source's date sort.
 
 export const REPORTS = [
+  {
+    slug: 'jumat-berkah-28-agustus-2026', url: '/laporan/jumat-berkah-28-agustus-2026',
+    date: '2026-08-28', category: 'Jumat Berkah',
+    title: 'Lihat Laporan: Jumat Berkah 28 Agustus 2026',
+    heading: 'Jumat Berkah Membawa Nasi Hangat di Jalanan Mega Kuningan',
+    seoTitle: 'Jumat Berkah 28 Agustus 2026 — Laporan | Cinta Foundation',
+    seoDescription: 'Laporan Jumat Berkah 28 Agustus 2026: 13 porsi nasi hangat dibagikan di kawasan Mega Kuningan, Jakarta Selatan.',
+    preview: 'Laporan Jumat Berkah 28 Agustus 2026: 13 porsi nasi hangat dibagikan di kawasan Mega Kuningan, Jakarta Selatan.',
+    image: 'jumat-berkah-28agu-og.jpg', ogImage: 'jumat-berkah-28agu-og.jpg', focus: 'center',
+    alt: 'Seorang relawan menyerahkan bungkus nasi kepada petugas kebersihan di tepi jalan kawasan Mega Kuningan',
+    full: true, article: 'jb28'
+  },
   {
     slug: 'jumat-berkah-14-agustus-2026', url: null,
     date: '2026-08-14', category: 'Jumat Berkah',
@@ -288,4 +322,4 @@ export const REPORTS = [
   }
 ];
 
-export const ARTICLES = { jb17: jbArticle, jb31: jb31Article, bb: bbArticle };
+export const ARTICLES = { jb17: jbArticle, jb31: jb31Article, bb: bbArticle, jb28: jb28Article };

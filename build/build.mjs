@@ -105,6 +105,7 @@ const SITE = [
     title: rep.seoTitle || `${rep.heading || rep.title} — Laporan Kegiatan | Cinta Foundation`,
     description: rep.seoDescription || rep.preview,
     ogType: 'article',
+    ogImage: rep.ogImage,
     lastmod: rep.date,
     schema: () => articleSchema(rep),
     body: () => pages.report(rep)
@@ -132,7 +133,7 @@ async function run() {
     const html =
       head({
         domain: DOMAIN, url: p.url, title: p.title, description: p.description,
-        ogType: p.ogType || 'website', schema: p.schema ? p.schema() : ''
+        ogType: p.ogType || 'website', ogImage: p.ogImage, schema: p.schema ? p.schema() : ''
       }) +
       headers(p.nav) +
       p.body() +

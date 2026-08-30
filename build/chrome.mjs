@@ -15,7 +15,8 @@ const MOB_OFF = 'color: #2A1820; font-weight: 400;';
 
 const FOOTER_LINK = "font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 14px; color: #F3E4E8; cursor: pointer; background: none; border: 0; padding: 2px 0; text-align: left; text-decoration: none;";
 
-export function head({ domain, url, title, description, ogType = 'website', schema = '' }) {
+export function head({ domain, url, title, description, ogType = 'website', ogImage, schema = '' }) {
+  ogImage = ogImage || 'og-cover.jpg';
   const abs = `https://${domain}${url}`;
   return `<!DOCTYPE html>
 <html lang="id">
@@ -31,10 +32,8 @@ export function head({ domain, url, title, description, ogType = 'website', sche
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${esc(abs)}">
-<meta property="og:image" content="https://${domain}/assets/og-cover.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://${domain}/assets/${ogImage}">
+${ogImage === 'og-cover.jpg' ? '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n' : ''}<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
