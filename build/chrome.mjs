@@ -15,7 +15,7 @@ const MOB_OFF = 'color: #2A1820; font-weight: 400;';
 
 const FOOTER_LINK = "font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 14px; color: #F3E4E8; cursor: pointer; background: none; border: 0; padding: 2px 0; text-align: left; text-decoration: none;";
 
-export function head({ domain, url, title, description, ogType = 'website', ogImage, schema = '' }) {
+export function head({ domain, url, title, description, ogType = 'website', ogImage, schema = '', extraHead = '' }) {
   ogImage = ogImage || 'og-cover.jpg';
   const abs = `https://${domain}${url}`;
   return `<!DOCTYPE html>
@@ -40,7 +40,7 @@ ${ogImage === 'og-cover.jpg' ? '<meta property="og:image:width" content="1200">\
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
-${schema}</head>
+${schema}${extraHead}</head>
 <body>
 
 <div style="min-height: 100vh; background: #F7F3EC; display: flex; flex-direction: column; overflow-x: clip;">
@@ -147,6 +147,33 @@ export function footer() {
 </div>
 
 <script src="/js/site.js" defer></script>
+</body>
+</html>
+`;
+}
+
+// Ad landing pages (/donasi/*): logo only, no site navigation, so the visitor
+// stays on the donation. Paired with landingFooter().
+export function landingHeader() {
+  return `
+  <header style="padding: 18px 20px 0;">
+    <a href="/" aria-label="Cinta Foundation — beranda" style="max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 10px; text-decoration: none;">
+      <img src="/assets/logo-wine.png" alt="" width="34" height="34" style="width: 34px; height: auto;">
+      <span style="font-family: 'Lora', serif; font-weight: 600; color: #5E1F39; font-size: 16px;">Cinta Foundation</span>
+    </a>
+  </header>
+`;
+}
+
+export function landingFooter(script) {
+  return `
+  <footer style="padding: 48px 20px 110px; text-align: center;">
+    <div style="font-weight: 300; font-size: 12px; color: #6B5A60;">© 2026 Yayasan Cinta Negeri Persada · <a href="/" style="color: #7B2F4D; font-weight: 500;">cintafoundation.org</a></div>
+  </footer>
+
+</div>
+
+<script src="/js/${script}" defer></script>
 </body>
 </html>
 `;

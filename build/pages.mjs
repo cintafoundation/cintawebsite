@@ -852,3 +852,118 @@ ${articleBody}${barakahBody}
     </main>
 `;
 }
+
+/* ============================================ DONASI — JUMAT BERKAH (ads) */
+// TikTok ad landing page. Not linked from the site navigation, noindex, and
+// kept out of the sitemap (see build.mjs). Copy supplied by B, Sep 2026.
+
+const MAILTO_BUKTI = 'mailto:admin@cintafoundation.org?subject=' +
+  encodeURIComponent('Bukti donasi Jumat Berkah') + '&body=' +
+  encodeURIComponent('Nama (atau Hamba Allah):\nNominal:\nTanggal transfer:\n\n(lampirkan screenshot bukti transfer)');
+
+export function donasiJumatBerkah() {
+  return `
+    <main class="dl" data-landing="jumat-berkah" data-landing-name="Donasi Jumat Berkah">
+
+      <section class="dl-hero">
+        <div class="dl-poster"><img src="${A('donasi-jb-poster.jpg')}" alt="Poster Jumat Berkah Cinta Foundation: Seporsi Nasi, Sepenuh Berkah. Relawan membagikan nasi kotak kepada petugas kebersihan, pengemudi ojek online, dan warga."${dim('donasi-jb-poster.jpg')} fetchpriority="high" decoding="async"></div>
+        <div class="dl-kicker">Jumat Berkah</div>
+        <h1>Seporsi Nasi, <em>Sepenuh Berkah</em></h1>
+      </section>
+
+      <section class="dl-story">
+        <blockquote class="dl-opening">“Mas, makanannya boleh satu? Saya belum sempat makan sejak pagi.”</blockquote>
+        <p>Kalimat itu kami dengar dari seorang bapak yang sedang beristirahat di tepi jalan. Sejak pagi ia sudah bekerja di bawah terik matahari, tetapi makan siang masih menjadi sesuatu yang harus ditunda.</p>
+        <p>Di sudut-sudut kota, ada banyak orang dengan hari yang serupa. Ada yang menarik gerobak, menjaga parkiran, menawarkan dagangan, ada juga yang sedang duduk sebentar melepas lelah. Pekerjaan mereka jalan terus, dan jam makan sering jadi yang pertama dikorbankan.</p>
+        <p>Melalui Jumat Berkah, satu nasi yang kita titipkan mungkin terlihat sederhana. Namun bagi seseorang di jalanan, ia bisa menjadi tenaga untuk melanjutkan hari dan bagi kita, menjadi sedekah yang semoga diterima dan dicatat sebagai kebaikan.</p>
+
+        <figure class="dl-ayat">
+          <blockquote>“Dan mereka memberikan makanan yang disukainya kepada orang miskin, anak yatim, dan orang yang ditawan.”</blockquote>
+          <figcaption>QS. Al-Insan: 8</figcaption>
+        </figure>
+
+        <p>Memberi makan termasuk amalan yang dicintai Allah, dan hari Jumat punya keistimewaannya sendiri. Karena itu kami memilih Jumat untuk berbagi sebungkus nasi dengan mereka yang sedang bekerja di jalan.</p>
+        <p>Melalui program Jumat Berkah, Cinta Foundation menyalurkan makanan siap saji sekaligus membagikannya kepada saudara-saudara kita yang berada di jalanan. Program ini kami jalankan secara rutin setiap pekan atau setiap dua pekan sekali, di jalanan di Jakarta Selatan.</p>
+
+        <div class="dl-pull">
+          <div class="dl-kicker">Jalanan menjadi titik temu kebaikan</div>
+          <p>tempat niat baik bertemu dengan kebutuhan nyata, dan tempat berbagi menjadi lebih dekat, lebih bermakna.</p>
+        </div>
+
+        <p class="dl-cta-lead">Bantu wujudkan Jumat yang penuh berkah dan kenyang.</p>
+        <p>Klik tombol donasi di bawah dan sebarkan halaman ini agar lebih banyak yang tergerak.</p>
+      </section>
+
+      <section class="dl-donate" id="donasi" aria-labelledby="donasi-judul">
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <div class="dl-kicker">Donasi Jumat Berkah</div>
+          <h2 id="donasi-judul">Pilih cara yang paling mudah</h2>
+        </div>
+
+        <div class="dl-tabs" role="tablist" aria-label="Cara donasi">
+          <button type="button" role="tab" aria-selected="true" data-dl-tab="qris">QRIS</button>
+          <button type="button" role="tab" aria-selected="false" data-dl-tab="bank">Transfer Bank</button>
+        </div>
+
+        <div class="dl-panel is-on" data-dl-panel="qris" role="tabpanel">
+          <div class="dl-qr"><img src="${A('qris-code.png')}" alt="Kode QRIS resmi Cinta Foundation ID, NMID ID1025412604759"${dim('qris-code.png')} decoding="async"></div>
+          <div>
+            <div class="dl-merchant">Cinta Foundation ID</div>
+            <div class="dl-nmid">NMID: ID1025412604759</div>
+          </div>
+          <a class="dl-btn dl-btn-primary" href="${A('qris-code.png')}" download="QRIS-Cinta-Foundation.png" data-ttq="Download" data-ttq-label="Simpan QRIS" data-toast="Gambar QRIS disimpan">⤓ Simpan gambar QRIS</a>
+          <ol class="dl-steps">
+            <li><span>1</span><div>Simpan gambar QRIS di atas.</div></li>
+            <li><span>2</span><div>Buka m-banking atau e-wallet (GoPay, OVO, DANA, ShopeePay, dll), pilih <b>Scan / Bayar QRIS</b>, lalu ambil gambar dari galeri.</div></li>
+            <li><span>3</span><div>Isi nominal, selesaikan pembayaran, dan simpan buktinya.</div></li>
+          </ol>
+        </div>
+
+        <div class="dl-panel" data-dl-panel="bank" role="tabpanel">
+          <div class="dl-bank">
+            <div class="dl-kicker">Transfer Bank</div>
+            <div class="dl-bank-name">Bank BJB</div>
+            <div class="dl-rek">1122888820201</div>
+            <div class="dl-an">a.n. <b>Yayasan Cinta Negeri Persada</b></div>
+          </div>
+          <button class="dl-btn dl-btn-ghost" type="button" data-copy="1122888820201" data-ttq="ClickButton" data-ttq-label="Salin rekening" data-toast="Nomor rekening disalin">Salin nomor rekening</button>
+        </div>
+
+        <div class="dl-confirm">
+          <p>Sudah berdonasi? Kirim buktinya supaya bisa kami catat dan konfirmasi.</p>
+          <a class="dl-btn dl-btn-primary" href="${esc(MAILTO_BUKTI)}" data-ttq="Contact" data-ttq-label="Email bukti">✉ Kirim bukti via email</a>
+          <a class="dl-btn dl-btn-ghost" href="https://ig.me/m/cinta_foundation" target="_blank" rel="noopener noreferrer" data-ttq="Contact" data-ttq-label="DM Instagram">Kirim via DM Instagram</a>
+          <p class="dl-note">Email tidak terbuka? Kirim ke <b>admin@cintafoundation.org</b> <button class="dl-linkish" type="button" data-copy="admin@cintafoundation.org" data-toast="Alamat email disalin">Salin</button></p>
+        </div>
+      </section>
+
+      <section class="dl-block">
+        <ul class="dl-promise">
+          <li>Semua bantuan disalurkan dalam bentuk makanan siap saji/nasi kotak.</li>
+          <li>Donasi kamu akan dikelola secara transparan dan dilaporkan secara berkala melalui kanal resmi Cinta Foundation. Follow Instagram: <a href="https://www.instagram.com/cinta_foundation/" target="_blank" rel="noopener noreferrer">@cinta_foundation</a></li>
+        </ul>
+      </section>
+
+      <section class="dl-block">
+        <div class="dl-kicker">Catatan terakhir</div>
+        <ul class="dl-log">
+          <li><span>28 Agustus 2026 · Mega Kuningan</span><b>13 porsi</b></li>
+          <li><span>31 Juli 2026 · Mega Kuningan</span><b>13 paket</b></li>
+          <li><span>17 Juli 2026 · Mega Kuningan</span><b>15 paket</b></li>
+        </ul>
+        <a class="dl-quiet" href="/laporan">Lihat laporan lengkap di Laporan Kegiatan →</a>
+      </section>
+
+      <section class="dl-block">
+        <div class="dl-trust">
+          <b>Yayasan Cinta Negeri Persada</b> (Cinta Foundation) — yayasan resmi terdaftar, SK Kemenkumham No. AHU-0006826.AH.01.04.Tahun 2024.<br>
+          Pastikan kamu hanya berdonasi melalui QRIS <b>Cinta Foundation ID</b> atau rekening BJB <b>a.n. Yayasan Cinta Negeri Persada</b>.
+        </div>
+      </section>
+
+    </main>
+
+    <div class="dl-sticky" data-sticky><a class="dl-btn dl-btn-primary" href="#donasi">Donasi Jumat Berkah</a></div>
+    <div class="dl-toast" data-toast-el role="status" aria-live="polite"></div>
+`;
+}
