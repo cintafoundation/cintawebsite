@@ -19,7 +19,7 @@ const BUILD_DATE = '2026-08-24';
 // TikTok Pixel (Events Manager → "Cinta Foundation - Website", owned by the
 // Cinta Foundation Business Center). Loaded on ad landing pages only. Leave
 // empty to build those pages without the pixel.
-const TIKTOK_PIXEL_ID = '';
+const TIKTOK_PIXEL_ID = 'DAS5KURC77UA02BT3TFG';
 
 // Base code as issued by TikTok Events Manager, plus a ViewContent for the
 // landing page. Click events are fired from js/donasi.js.
