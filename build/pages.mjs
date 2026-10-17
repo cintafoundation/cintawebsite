@@ -715,9 +715,20 @@ function blocks(list) {
   }).join('\n                ');
 }
 
-/* A photo-led report: heading, then images and copy, and nothing after it.
-   The three earlier reports close with a Drive documentation panel; this one
-   deliberately has none. */
+/* Optional closing collage on a photo-led report: a divider, an <h2>, and one
+   full-column figure. Set `kolase: { name, w, h, alt, caption }` on the
+   article; a report without it renders exactly as before. */
+function kolase(k) {
+  if (!k) return '';
+  return `
+                <hr style="width: 100%; margin: 22px 0 12px; border: 0; border-top: 1px solid rgba(200,160,99,0.4);">
+                <h2 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(23px, 3vw, 30px); line-height: 1.22; color: #5E1F39; margin: 0; text-wrap: pretty;">Dokumentasi lainnya</h2>
+                ${blocks([{ ...k, isPhoto: true, maxW: '100%', eager: false }])}`;
+}
+
+/* A photo-led report: heading, then images and copy, then optionally a
+   collage. The three earlier reports close with a Drive documentation panel;
+   these deliberately have none. */
 function photoReport(rep, art) {
   return `
     <main style="flex: 1;">
@@ -729,7 +740,7 @@ function photoReport(rep, art) {
         </div>
 
         <div style="max-width: 720px; margin: 32px auto 0; width: 100%; display: flex; flex-direction: column; gap: 22px;">
-                ${blocks(art.blocks)}
+                ${blocks(art.blocks)}${kolase(art.kolase)}
         </div>
       </section>
     </main>

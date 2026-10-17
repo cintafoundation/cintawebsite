@@ -17,8 +17,9 @@ const MAX_EDGE = 1440;
 const PHOTO_PNGS = new Set(['jumat-berkah-1.png', 'jumat-berkah-2.png']);
 // Already optimised upstream (WebP + JPG, progressive, q88/82) and delivered
 // with fixed filenames. Copied byte-for-byte: re-encoding would only lose
-// quality, and the 1447px landscapes would trip the resize cap below.
-const PREOPTIMISED = /^jumat-berkah-28agu-/;
+// quality, and the 1447px landscapes and 1608px collage would trip the
+// resize cap below.
+const PREOPTIMISED = /^jumat-berkah-(28agu|18sep)-/;
 
 // Keep as PNG for transparency.
 const KEEP_PNG = new Set(['logo-cream.png', 'logo-wine.png']);

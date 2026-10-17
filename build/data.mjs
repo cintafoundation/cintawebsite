@@ -261,11 +261,50 @@ export const jb28Article = {
   ]
 };
 
+// 18 September 2026 — photo-led, same pattern as 28 Agustus, plus the first
+// closing collage. Copy, captions and alt text are verbatim from
+// INSTRUKSI_CLAUDE_CODE_18_SEPTEMBER.md and must not be reworded. No
+// documentation-link block, by instruction.
+export const jb18sepArticle = {
+  layout: 'photo',
+  blocks: [
+    { isPhoto: true, name: 'jumat-berkah-18sep-cover', w: 626, h: 728, maxW: '640px', eager: true,
+      alt: 'Relawan menyerahkan nasi kotak kepada petugas kebersihan yang sedang memegang sapu di trotoar',
+      caption: 'Seorang petugas kebersihan berhenti sejenak dari menyapu untuk menerima nasi kotak.' },
+    P('Jumat, 18 September 2026, sekitar pukul setengah sepuluh pagi, Jumat Berkah berjalan di sekitar kawasan Mega Kuningan, Jakarta Selatan.'),
+    { isPhoto: true, name: 'jumat-berkah-18sep-ojol', w: 626, h: 820, maxW: '460px',
+      alt: 'Pengemudi ojek daring berhelm oranye tersenyum saat menerima nasi kotak dari tangan relawan',
+      caption: 'Salah satu pengemudi ojek daring yang kami temui di tepi jalan.' },
+    P('Tiga belas porsi nasi kotak, lengkap dengan minuman dan camilan, kami bagikan pagi itu. Penerimanya orang-orang yang sudah bekerja sejak pagi: petugas kebersihan, petugas PPSU, pengemudi ojek daring, kurir, dan petugas keamanan gedung. Kebanyakan sedang di tengah pekerjaan, jadi serah terimanya singkat. Di tepi trotoar, di atas motor, di depan pagar rumah.'),
+    { isPhoto: true, name: 'jumat-berkah-18sep-ppsu', w: 520, h: 692, maxW: '460px',
+      alt: 'Dua petugas PPSU berseragam oranye tersenyum di atas motor sambil memegang bungkus nasi',
+      caption: 'Dua petugas PPSU menerima nasi di sela jam kerja.' },
+    P('Jumat Berkah berjalan dua pekan sekali sejak Agustus 2025. Terima kasih untuk setiap nama yang ikut menitipkan rezekinya pekan ini. Sampai jumpa di Jumat Berkah berikutnya. Salam.')
+  ],
+  kolase: {
+    name: 'jumat-berkah-18sep-kolase', w: 1608, h: 1422,
+    alt: 'Kolase enam foto penerima Jumat Berkah: pengemudi ojek daring, petugas keamanan, petugas PPSU, dua kurir, dan relawan yang menyerahkan nasi kepada petugas pengangkut sampah',
+    caption: 'Penerima lain pagi itu: pengemudi ojek daring, petugas keamanan, petugas PPSU, kurir, dan petugas pengangkut sampah.'
+  }
+};
+
 // ------------------------------------------------------------ report index
 // `url` null  => no standalone page (report still listed in the archive).
 // Ordered newest first, matching the source's date sort.
 
 export const REPORTS = [
+  {
+    slug: 'jumat-berkah-18-september-2026', url: '/laporan/jumat-berkah-18-september-2026',
+    date: '2026-09-18', category: 'Jumat Berkah',
+    title: 'Lihat Laporan: Jumat Berkah 18 September 2026',
+    heading: 'Jumat Berkah Menemui Mereka yang Sudah Bekerja Sejak Pagi',
+    seoTitle: 'Jumat Berkah 18 September 2026 — Laporan | Cinta Foundation',
+    seoDescription: 'Laporan Jumat Berkah 18 September 2026: 13 porsi nasi kotak dibagikan kepada para pekerja pagi di kawasan Mega Kuningan, Jakarta Selatan.',
+    preview: 'Laporan Jumat Berkah 18 September 2026: 13 porsi nasi kotak dibagikan kepada para pekerja pagi di kawasan Mega Kuningan, Jakarta Selatan.',
+    image: 'jumat-berkah-18sep-og.jpg', ogImage: 'jumat-berkah-18sep-og.jpg', focus: 'center',
+    alt: 'Relawan menyerahkan nasi kotak kepada petugas kebersihan yang sedang memegang sapu di trotoar',
+    full: true, article: 'jb18sep'
+  },
   {
     slug: 'jumat-berkah-28-agustus-2026', url: '/laporan/jumat-berkah-28-agustus-2026',
     date: '2026-08-28', category: 'Jumat Berkah',
@@ -322,4 +361,4 @@ export const REPORTS = [
   }
 ];
 
-export const ARTICLES = { jb17: jbArticle, jb31: jb31Article, bb: bbArticle, jb28: jb28Article };
+export const ARTICLES = { jb17: jbArticle, jb31: jb31Article, bb: bbArticle, jb28: jb28Article, jb18sep: jb18sepArticle };
