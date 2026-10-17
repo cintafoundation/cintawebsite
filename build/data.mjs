@@ -288,11 +288,51 @@ export const jb18sepArticle = {
   }
 };
 
+// 2 Oktober 2026 — photo-led with a closing collage, same pattern as
+// 18 September. Copy, captions and alt text are verbatim from
+// INSTRUKSI_CLAUDE_CODE_02_OKTOBER.md and must not be reworded. No
+// documentation-link block, by instruction.
+export const jb02oktArticle = {
+  layout: 'photo',
+  blocks: [
+    { isPhoto: true, name: 'jumat-berkah-02okt-cover', w: 618, h: 790, maxW: '640px', eager: true,
+      alt: 'Relawan menyerahkan nasi kotak kepada pedagang gerobak di trotoar, dengan gedung perkantoran di latar belakang',
+      caption: 'Seorang pedagang gerobak menerima nasi kotak di trotoar, dengan gedung-gedung Mega Kuningan di belakangnya.' },
+    P('Jumat, 2 Oktober 2026, sekitar pukul setengah sepuluh pagi, Jumat Berkah kembali berjalan di sekitar kawasan Mega Kuningan, Jakarta Selatan.'),
+    { isPhoto: true, name: 'jumat-berkah-02okt-satpam', w: 583, h: 662, maxW: '460px',
+      alt: 'Petugas keamanan berompi kuning tersenyum menerima nasi kotak dari relawan di depan pagar rumah',
+      caption: 'Seorang petugas keamanan menerima nasi kotak di depan pagar tempatnya berjaga.' },
+    P('Tiga belas porsi kami bagikan. Setiap kotak berisi nasi, ayam goreng, dan orek tempe, ditambah minuman dan kue basah sebagai camilan.'),
+    P('Kali ini sebagian besar penerimanya pedagang kaki lima yang sudah membuka gerobak sejak pagi, mulai dari penjual tahu gejrot sampai penjual es cokelat. Sisanya petugas keamanan, petugas kebersihan, dan petugas cleaning service gedung.'),
+    { isPhoto: true, name: 'jumat-berkah-02okt-cleaning-service', w: 618, h: 790, maxW: '460px',
+      alt: 'Seorang pekerja berseragam biru tersenyum sambil memegang bungkus nasi',
+      caption: 'Seorang pekerja tersenyum saat menerima nasi kotak.' },
+    P('Jumat Berkah berjalan dua pekan sekali sejak Agustus 2025. Terima kasih untuk setiap nama yang ikut menitipkan rezekinya pekan ini. Sampai jumpa di Jumat Berkah berikutnya. Salam.')
+  ],
+  kolase: {
+    name: 'jumat-berkah-02okt-kolase', w: 1608, h: 2127,
+    alt: 'Kolase sembilan foto: petugas kebersihan, isi nasi kotak, petugas keamanan, seorang pedagang keliling, kue basah dalam wadah, dan empat pedagang gerobak menerima nasi kotak dari relawan',
+    caption: 'Penerima lain pagi itu: petugas kebersihan, petugas keamanan, dan para pedagang kaki lima. Dua foto memperlihatkan isi nasi kotak dan kue basah yang dibagikan.'
+  }
+};
+
 // ------------------------------------------------------------ report index
 // `url` null  => no standalone page (report still listed in the archive).
 // Ordered newest first, matching the source's date sort.
 
 export const REPORTS = [
+  {
+    slug: 'jumat-berkah-2-oktober-2026', url: '/laporan/jumat-berkah-2-oktober-2026',
+    date: '2026-10-02', category: 'Jumat Berkah',
+    title: 'Lihat Laporan: Jumat Berkah 2 Oktober 2026',
+    heading: 'Jumat Berkah Singgah di Gerobak-Gerobak Pedagang Kaki Lima',
+    seoTitle: 'Jumat Berkah 2 Oktober 2026 — Laporan | Cinta Foundation',
+    seoDescription: 'Laporan Jumat Berkah 2 Oktober 2026: 13 porsi nasi kotak dibagikan kepada pedagang kaki lima dan pekerja pagi di kawasan Mega Kuningan.',
+    preview: 'Laporan Jumat Berkah 2 Oktober 2026: 13 porsi nasi kotak dibagikan kepada pedagang kaki lima dan pekerja pagi di kawasan Mega Kuningan.',
+    image: 'jumat-berkah-02okt-og.jpg', ogImage: 'jumat-berkah-02okt-og.jpg', focus: 'center',
+    alt: 'Relawan menyerahkan nasi kotak kepada pedagang gerobak di trotoar, dengan gedung perkantoran di latar belakang',
+    full: true, article: 'jb02okt'
+  },
   {
     slug: 'jumat-berkah-18-september-2026', url: '/laporan/jumat-berkah-18-september-2026',
     date: '2026-09-18', category: 'Jumat Berkah',
@@ -361,4 +401,4 @@ export const REPORTS = [
   }
 ];
 
-export const ARTICLES = { jb17: jbArticle, jb31: jb31Article, bb: bbArticle, jb28: jb28Article, jb18sep: jb18sepArticle };
+export const ARTICLES = { jb17: jbArticle, jb31: jb31Article, bb: bbArticle, jb28: jb28Article, jb18sep: jb18sepArticle, jb02okt: jb02oktArticle };
