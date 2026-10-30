@@ -769,6 +769,9 @@ const MAILTO_BUKTI = 'mailto:admin@cintafoundation.org?subject=' +
   encodeURIComponent('Nama (atau Hamba Allah):\nNominal:\nTanggal transfer:\n\n(lampirkan screenshot bukti transfer)');
 
 export function donasiJumatBerkah() {
+  const catatan = REPORTS.filter((r) => r.category === 'Jumat Berkah' && r.log).slice(0, 3)
+    .map((r) => `<li><span>${esc(tanggalID(r.date))} · ${esc(r.log.lokasi)}</span><b>${esc(r.log.jumlah)}</b></li>`)
+    .join('\n          ');
   return `
     <main class="dl" data-landing="jumat-berkah" data-landing-name="Donasi Jumat Berkah">
 
@@ -854,9 +857,7 @@ export function donasiJumatBerkah() {
       <section class="dl-block">
         <div class="dl-kicker">Catatan terakhir</div>
         <ul class="dl-log">
-          <li><span>28 Agustus 2026 · Mega Kuningan</span><b>13 porsi</b></li>
-          <li><span>31 Juli 2026 · Mega Kuningan</span><b>13 paket</b></li>
-          <li><span>17 Juli 2026 · Mega Kuningan</span><b>15 paket</b></li>
+          ${catatan}
         </ul>
         <a class="dl-quiet" href="/laporan">Lihat laporan lengkap di Laporan Kegiatan →</a>
       </section>

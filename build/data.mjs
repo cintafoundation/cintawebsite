@@ -351,11 +351,13 @@ export const jb16oktArticle = {
 // ------------------------------------------------------------ report index
 // `url` null  => no standalone page (report still listed in the archive).
 // Ordered newest first, matching the source's date sort.
+// `log` feeds the "Catatan terakhir" list on /donasi/jumat-berkah (three newest
+// entries that have one); leave it out while a report has no final count.
 
 export const REPORTS = [
   {
     slug: 'jumat-berkah-16-oktober-2026', url: '/laporan/jumat-berkah-16-oktober-2026',
-    date: '2026-10-16', category: 'Jumat Berkah',
+    date: '2026-10-16', category: 'Jumat Berkah', log: { lokasi: 'Mega Kuningan', jumlah: '13 porsi' },
     title: 'Lihat Laporan: Jumat Berkah 16 Oktober 2026',
     heading: 'Jumat Berkah Menyusuri Gang dan Tepi Jalan Mega Kuningan',
     seoTitle: 'Jumat Berkah 16 Oktober 2026 — Laporan | Cinta Foundation',
@@ -367,7 +369,7 @@ export const REPORTS = [
   },
   {
     slug: 'jumat-berkah-2-oktober-2026', url: '/laporan/jumat-berkah-2-oktober-2026',
-    date: '2026-10-02', category: 'Jumat Berkah',
+    date: '2026-10-02', category: 'Jumat Berkah', log: { lokasi: 'Mega Kuningan', jumlah: '13 porsi' },
     title: 'Lihat Laporan: Jumat Berkah 2 Oktober 2026',
     heading: 'Jumat Berkah Singgah di Gerobak-Gerobak Pedagang Kaki Lima',
     seoTitle: 'Jumat Berkah 2 Oktober 2026 — Laporan | Cinta Foundation',
@@ -379,7 +381,7 @@ export const REPORTS = [
   },
   {
     slug: 'jumat-berkah-18-september-2026', url: '/laporan/jumat-berkah-18-september-2026',
-    date: '2026-09-18', category: 'Jumat Berkah',
+    date: '2026-09-18', category: 'Jumat Berkah', log: { lokasi: 'Mega Kuningan', jumlah: '13 porsi' },
     title: 'Lihat Laporan: Jumat Berkah 18 September 2026',
     heading: 'Jumat Berkah Menemui Mereka yang Sudah Bekerja Sejak Pagi',
     seoTitle: 'Jumat Berkah 18 September 2026 — Laporan | Cinta Foundation',
@@ -391,7 +393,7 @@ export const REPORTS = [
   },
   {
     slug: 'jumat-berkah-28-agustus-2026', url: '/laporan/jumat-berkah-28-agustus-2026',
-    date: '2026-08-28', category: 'Jumat Berkah',
+    date: '2026-08-28', category: 'Jumat Berkah', log: { lokasi: 'Mega Kuningan', jumlah: '13 porsi' },
     title: 'Lihat Laporan: Jumat Berkah 28 Agustus 2026',
     heading: 'Jumat Berkah Membawa Nasi Hangat di Jalanan Mega Kuningan',
     seoTitle: 'Jumat Berkah 28 Agustus 2026 — Laporan | Cinta Foundation',
@@ -410,7 +412,7 @@ export const REPORTS = [
   },
   {
     slug: 'jumat-berkah-31-juli-2026', url: '/laporan/jumat-berkah-31-juli-2026',
-    date: '2026-07-31', category: 'Jumat Berkah',
+    date: '2026-07-31', category: 'Jumat Berkah', log: { lokasi: 'Mega Kuningan', jumlah: '13 paket' },
     seoTitle: 'Jumat Berkah 31 Juli 2026 — Laporan | Cinta Foundation',
     seoDescription: 'Laporan Jumat Berkah 31 Juli 2026: 13 paket makanan dibagikan langsung kepada para pekerja yang kami temui di jalan dan ruang publik.',
     title: 'Lihat Laporan: Jumat Berkah 31 Juli 2026',
@@ -422,7 +424,7 @@ export const REPORTS = [
   },
   {
     slug: 'jumat-berkah-17-juli-2026', url: '/laporan/jumat-berkah-17-juli-2026',
-    date: '2026-07-17', category: 'Jumat Berkah',
+    date: '2026-07-17', category: 'Jumat Berkah', log: { lokasi: 'Mega Kuningan', jumlah: '15 paket' },
     seoTitle: 'Jumat Berkah 17 Juli 2026 — Laporan | Cinta Foundation',
     seoDescription: 'Laporan Jumat Berkah 17 Juli 2026: 15 paket makanan dibagikan menyusuri kawasan Mega Kuningan, Jakarta Selatan.',
     title: 'Lihat Laporan: Jumat Berkah 17 Juli 2026',
