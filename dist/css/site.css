@@ -76,16 +76,5 @@ body.menu-open { overflow: hidden; }
 .faq[open] .faq-chev { transform: rotate(45deg); }
 .faq-a { font-weight: 300; font-size: 15px; line-height: 1.8; color: #2A1820; padding: 0 26px 26px; max-width: 640px; }
 
-.rail-step { color: rgba(42,24,32,0.4); font-weight: 300; }
-.rail-step[data-state="done"]   { color: #A0793F; font-weight: 400; }
-.rail-step[data-state="active"] { color: #7B2F4D; font-weight: 500; }
-
-.t-step:not(.is-on) { display: none !important; }
-.t-chip { background: rgba(247,243,236,0.8); color: #7B2F4D; border: 1.5px solid rgba(123,47,77,0.35); font-weight: 400; }
-.t-chip[aria-pressed="true"] { background: #7B2F4D; color: #F7F3EC; border-color: #7B2F4D; font-weight: 500; }
-.t-option { background: rgba(247,243,236,0.6); border: 1.5px solid rgba(200,160,99,0.45); }
-.t-option[aria-pressed="true"] { background: rgba(247,243,236,0.95); border-color: #7B2F4D; }
-.flow-nav.is-off, .flow-back.is-off { display: none !important; }
-
 /* The archive filter row hides its scrollbar, as in the source. */
 .filter-rail::-webkit-scrollbar { display: none; }

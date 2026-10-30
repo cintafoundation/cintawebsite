@@ -4,7 +4,7 @@
 import { esc } from './chrome.mjs';
 import {
   PILLARS, FRAMEWORK, PROGRAM_ARCHIVE, MISSIONS, FAQS,
-  TITIP_PROGRAMS, TITIP_AMOUNTS, TITIP_RECIPIENTS, RAIL_LABELS,
+  TITIP_PROGRAMS,
   LAP_FILTERS, REPORTS, ARTICLES
 } from './data.mjs';
 
@@ -15,6 +15,9 @@ const dim = (name) => {
   const m = manifest[name];
   return m ? ` width="${m.w}" height="${m.h}"` : '';
 };
+const BULAN = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+// '2026-10-16' -> '16 Oktober 2026'
+const tanggalID = (iso) => { const [y, m, d] = iso.split('-').map(Number); return `${d} ${BULAN[m - 1]} ${y}`; };
 
 const CARD_BASE = 'border-radius: 22px; padding: 32px 26px 36px; display: flex; flex-direction: column; gap: 14px; cursor: pointer; text-align: left; transition: transform 0.3s ease, box-shadow 0.3s ease; text-decoration: none;';
 // Pillar numerals. Heritage Gold reads well on the Deep Wine card (5.01:1) but
@@ -24,9 +27,6 @@ const NUM_ON_WINE = "font-family: 'Lora', serif; font-style: italic; font-size: 
 const NUM_ON_BLUSH = "font-family: 'Lora', serif; font-style: italic; font-size: 17px; color: #A0793F; letter-spacing: 0.1em;";
 const DON_TAB_BASE = "font-family: 'Poppins', sans-serif; font-size: 13.5px; padding: 9px 16px; border-radius: 8px; cursor: pointer; white-space: nowrap; transition: all 0.2s ease;";
 const FILTER_BASE = "font-family: 'Poppins', sans-serif; font-size: 13.5px; letter-spacing: 0.02em; padding: 9px 18px; border-radius: 8px; cursor: pointer; white-space: nowrap; transition: all 0.2s ease;";
-const CHIP_BASE = "font-family: 'Poppins', sans-serif; font-size: 14px; padding: 13px 24px; border-radius: 999px; cursor: pointer; transition: all 0.2s ease; min-height: 46px;";
-const OPT_BASE = 'display: flex; flex-direction: column; gap: 8px; text-align: left; padding: 24px 26px; border-radius: 18px; cursor: pointer; transition: all 0.2s ease;';
-const RAIL_BASE = "font-family: 'Poppins', sans-serif; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; display: flex; gap: 7px; align-items: baseline;";
 
 /* ================================================================ BERANDA */
 
@@ -432,33 +432,39 @@ export function tentang() {
 /* ============================================================ TITIP CINTA */
 
 export function titip() {
-  const rail = RAIL_LABELS.map((label, i) => {
-    const n = i + 1;
-    return `<div class="rail-step" data-rail="${n}" data-state="${n === 1 ? 'active' : 'todo'}" style="${RAIL_BASE}"><span style="font-family: 'Lora', serif; font-style: italic;">0${n}</span> ${esc(label)}</div>`;
-  }).join('\n              ');
-
-  const programChoices = TITIP_PROGRAMS.map((p) => `<button type="button" class="t-option" data-program="${esc(p.key)}" data-program-title="${esc(p.title)}" aria-pressed="false" style="${OPT_BASE}">
-                    <span style="font-family: 'Lora', serif; font-weight: 600; font-size: 19px; color: #5E1F39;">${esc(p.title)}</span>
-                    <span style="font-weight: 300; font-size: 14.5px; line-height: 1.6; color: #2A1820;">${esc(p.desc)}</span>
-                  </button>`).join('\n                  ');
-
-  const amountChoices = TITIP_AMOUNTS.map((a) =>
-    `<button type="button" class="t-chip" data-amount="${esc(a)}" aria-pressed="false" style="${CHIP_BASE}">${esc(a)}</button>`
-  ).join('\n                  ');
-
-  const recipientChoices = TITIP_RECIPIENTS.map((r) =>
-    `<button type="button" class="t-chip" data-recipient="${esc(r)}" aria-pressed="false" style="${CHIP_BASE}">${esc(r)}</button>`
-  ).join('\n                  ');
-
-  const summaryRows = [
-    ['Program', 'program', '—'],
-    ['Nominal', 'amount', '—'],
-    ['Dari', 'donor', 'Hamba Allah'],
-    ['Dititipkan untuk', 'recipient', 'Atas nama sendiri']
-  ].map(([label, key, value]) => `<div style="display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: space-between; align-items: baseline; padding: 16px 0; border-bottom: 1px solid rgba(200,160,99,0.4);">
-                    <dt style="font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #A0793F;">${esc(label)}</dt>
-                    <dd data-summary="${key}" style="margin: 0; font-family: 'Lora', serif; font-size: 18px; color: #5E1F39; text-align: right;">${esc(value)}</dd>
-                  </div>`).join('\n                  ');
+  const cards = TITIP_PROGRAMS.map((p) => {
+    // Newest published report in this program's category feeds the card's
+    // "terakhir disalurkan" line, so a new report updates the card without
+    // touching the program list. The thumbnail is the program's own poster,
+    // shown whole at its native ratio (from the asset manifest).
+    const latest = REPORTS.find((r) => r.category === p.category);
+    const m = manifest[p.image];
+    const ratio = m ? `${m.w} / ${m.h}` : '4 / 5';
+    const webp = p.image.replace(/\.(jpe?g|png)$/i, '.webp');
+    const source = manifest[webp] ? `<source srcset="${A(webp)}" type="image/webp">
+                ` : '';
+    const media = `<picture style="display: block; aspect-ratio: ${ratio}; border-radius: 18px; overflow: hidden; border: 1px solid rgba(200,160,99,0.35); background: #F3E4E8;">
+                ${source}                <img src="${A(p.image)}" alt="${esc(p.imageAlt)}"${dim(p.image)} loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </picture>`;
+    const terakhir = latest
+      ? `<div style="display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; font-size: 13.5px; font-weight: 300; line-height: 1.6; color: #2A1820;">
+                  <span>Terakhir disalurkan <strong style="font-weight: 500; color: #5E1F39;">${esc(tanggalID(latest.date))}</strong></span>
+                  ${latest.url ? `<a class="hv-wine" href="${latest.url}" style="color: #7B2F4D; text-decoration: underline; text-underline-offset: 3px;">Lihat laporannya</a>` : ''}
+                </div>`
+      : '';
+    return `<article style="background: rgba(247,243,236,0.9); border: 1px solid rgba(200,160,99,0.45); border-radius: 28px; padding: clamp(18px, 2.4vw, 26px); display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(20px, 3vw, 36px); align-items: center;">
+              ${media}
+              <div style="display: flex; flex-direction: column; gap: 14px; padding: clamp(4px, 1vw, 12px) 0;">
+                <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: #A0793F;">${esc(p.eyebrow)}</div>
+                <h3 style="font-family: 'Lora', serif; font-weight: 600; font-size: clamp(26px, 3.2vw, 34px); line-height: 1.15; letter-spacing: -0.01em; color: #5E1F39; margin: 0;">${esc(p.title)}</h3>
+                <p style="font-weight: 300; font-size: 15.5px; line-height: 1.8; color: #2A1820; margin: 0; max-width: 460px; text-wrap: pretty;">${esc(p.desc)}</p>
+                ${terakhir}
+                <div style="margin-top: 6px;">
+                  <a class="as-btn hv-deep" href="${p.href}" style="display: inline-block; font-family: 'Poppins', sans-serif; font-size: 14.5px; font-weight: 500; color: #F7F3EC; background: #7B2F4D; border: 0; padding: 15px 34px; border-radius: 999px; letter-spacing: 0.03em; text-decoration: none; transition: background 0.2s ease;">${esc(p.cta)} →</a>
+                </div>
+              </div>
+            </article>`;
+  }).join('\n            ');
 
   return `
     <main style="flex: 1;">
@@ -473,126 +479,16 @@ export function titip() {
         </div>
       </section>
 
-      <!-- Journey -->
-      <section style="padding: 0 20px clamp(64px, 8vw, 100px);">
-        <div data-titip-flow style="max-width: 940px; margin: 0 auto; background: rgba(243,228,232,0.55); border: 1px solid rgba(200,160,99,0.4); border-radius: 32px; padding: clamp(28px, 4vw, 52px); display: flex; flex-direction: column; gap: 32px;">
-
-          <!-- Step rail -->
-          <nav aria-label="Langkah Titip Cinta" style="display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; padding-bottom: 22px; border-bottom: 1px solid rgba(200,160,99,0.4);">
-              ${rail}
-          </nav>
-
-          <!-- STEP 1 — Pilih program -->
-          <div class="t-step is-on" data-step="1" style="display: flex; flex-direction: column; gap: 22px;">
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: #A0793F;">Langkah 01</div>
-              <h2 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(26px, 3.4vw, 34px); color: #5E1F39; margin: 0;">Cinta ini untuk apa?</h2>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-                  ${programChoices}
-            </div>
+      <!-- Pilihan Titip Cinta -->
+      <section aria-labelledby="pilihan-judul" style="padding: 0 20px clamp(64px, 8vw, 100px);">
+        <div style="max-width: 940px; margin: 0 auto; background: rgba(243,228,232,0.55); border: 1px solid rgba(200,160,99,0.4); border-radius: 32px; padding: clamp(28px, 4vw, 52px); display: flex; flex-direction: column; gap: 28px;">
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <h2 id="pilihan-judul" style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(26px, 3.4vw, 34px); color: #5E1F39; margin: 0;">Pilihan Titip Cinta</h2>
+            <p style="font-weight: 300; font-size: 15.5px; line-height: 1.8; color: #2A1820; margin: 0; max-width: 560px; text-wrap: pretty;">Pilih program yang ingin kamu titipi. Setiap titipan kami salurkan, lalu kami laporkan di halaman Laporan Kegiatan.</p>
           </div>
-
-          <!-- STEP 2 — Nominal -->
-          <div class="t-step" data-step="2" style="display: flex; flex-direction: column; gap: 22px;">
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: #A0793F;">Langkah 02</div>
-              <h2 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(26px, 3.4vw, 34px); color: #5E1F39; margin: 0;">Berapa yang ingin dititipkan?</h2>
-              <p style="font-family: 'Lora', serif; font-style: italic; font-size: 16px; color: #7B2F4D; margin: 0;">Tidak perlu menunggu jumlah besar.</p>
-            </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                  ${amountChoices}
-            </div>
-            <label style="display: flex; flex-direction: column; gap: 8px; max-width: 320px;">
-              <span style="font-size: 12.5px; font-weight: 400; color: #2A1820;">Atau tulis jumlah lain</span>
-              <input type="text" inputmode="numeric" data-custom-amount placeholder="Rp" style="font-family: 'Poppins', sans-serif; font-size: 15px; color: #2A1820; background: rgba(247,243,236,0.9); border: 1px solid rgba(200,160,99,0.5); border-radius: 10px; padding: 14px 16px; min-height: 48px;">
-            </label>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 20px;">
+            ${cards}
           </div>
-
-          <!-- STEP 3 — Identitas -->
-          <div class="t-step" data-step="3" style="display: flex; flex-direction: column; gap: 22px;">
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: #A0793F;">Langkah 03</div>
-              <h2 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(26px, 3.4vw, 34px); color: #5E1F39; margin: 0;">Boleh kami tahu namamu?</h2>
-              <p style="font-weight: 300; font-size: 15px; line-height: 1.7; color: #2A1820; margin: 0; max-width: 520px;">Hanya untuk konfirmasi. Kalau ingin tetap anonim, tulis “Hamba Allah”.</p>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; max-width: 640px;">
-              <label style="display: flex; flex-direction: column; gap: 8px;">
-                <span style="font-size: 12.5px; color: #2A1820;">Nama</span>
-                <input type="text" data-donor-name placeholder="Nama atau Hamba Allah" style="font-family: 'Poppins', sans-serif; font-size: 15px; color: #2A1820; background: rgba(247,243,236,0.9); border: 1px solid rgba(200,160,99,0.5); border-radius: 10px; padding: 14px 16px; min-height: 48px;">
-              </label>
-              <label style="display: flex; flex-direction: column; gap: 8px;">
-                <span style="font-size: 12.5px; color: #2A1820;">Email atau WhatsApp</span>
-                <input type="text" data-donor-contact placeholder="Agar kami bisa mengonfirmasi" style="font-family: 'Poppins', sans-serif; font-size: 15px; color: #2A1820; background: rgba(247,243,236,0.9); border: 1px solid rgba(200,160,99,0.5); border-radius: 10px; padding: 14px 16px; min-height: 48px;">
-              </label>
-            </div>
-          </div>
-
-          <!-- STEP 4 — Titip untuk seseorang -->
-          <div class="t-step" data-step="4" style="display: flex; flex-direction: column; gap: 22px;">
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: #A0793F;">Langkah 04</div>
-              <h2 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(26px, 3.4vw, 34px); color: #5E1F39; margin: 0;">Titip untuk <em style="font-style: italic; color: #7B2F4D;">seseorang</em>?</h2>
-              <p style="font-family: 'Lora', serif; font-style: italic; font-size: 16.5px; line-height: 1.6; color: #7B2F4D; margin: 0; max-width: 540px;">Cinta bisa dititipkan atas nama orang yang kamu cintai — yang masih ada, atau yang sudah pergi.</p>
-            </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                  ${recipientChoices}
-            </div>
-            <label style="display: flex; flex-direction: column; gap: 8px; max-width: 380px;">
-              <span style="font-size: 12.5px; color: #2A1820;">Nama yang dititipi (opsional)</span>
-              <input type="text" data-recipient-name placeholder="Misal: Ibu Siti" style="font-family: 'Poppins', sans-serif; font-size: 15px; color: #2A1820; background: rgba(247,243,236,0.9); border: 1px solid rgba(200,160,99,0.5); border-radius: 10px; padding: 14px 16px; min-height: 48px;">
-            </label>
-            <button type="button" data-skip-recipient style="align-self: flex-start; font-family: 'Poppins', sans-serif; font-size: 13.5px; font-weight: 400; color: #7B2F4D; background: none; border: 0; text-decoration: underline; cursor: pointer; padding: 8px 0;">Titipkan atas nama saya sendiri</button>
-          </div>
-
-          <!-- STEP 5 — Pembayaran -->
-          <div class="t-step" data-step="5" style="display: flex; flex-direction: column; gap: 24px;">
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: #A0793F;">Langkah 05</div>
-              <h2 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(26px, 3.4vw, 34px); color: #5E1F39; margin: 0;">Cara menitipkan</h2>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; align-items: stretch;">
-              <div style="background: #5E1F39; border-radius: 22px; padding: 32px 30px; display: flex; flex-direction: column; justify-content: center; gap: 12px;">
-                <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: #C8A063;">Transfer Bank</div>
-                <div style="font-family: 'Lora', serif; font-weight: 600; font-size: 21px; color: #F7F3EC;">Bank BJB</div>
-                <div style="font-family: 'Lora', serif; font-size: clamp(24px, 3vw, 30px); letter-spacing: 0.1em; color: #F3E4E8;">1122888820201</div>
-                <div style="font-weight: 300; font-size: 14px; line-height: 1.6; color: #F3E4E8;">a.n. <strong style="font-weight: 500; color: #F7F3EC;">Yayasan Cinta Negeri Persada</strong> (Cinta Foundation)</div>
-              </div>
-              <div style="border: 1px solid rgba(200,160,99,0.6); background: rgba(247,243,236,0.9); border-radius: 22px; padding: 28px 30px 30px; display: flex; flex-direction: column; gap: 14px; justify-content: center; align-items: center; text-align: center;">
-                <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: #A0793F;">QRIS</div>
-                <img src="${A('qris-code.png')}" alt="Kode QRIS resmi Cinta Foundation ID, NMID ID1025412604759"${dim('qris-code.png')} loading="lazy" decoding="async" style="width: 100%; max-width: 300px; height: auto; display: block; border-radius: 10px; background: #FFFFFF;">
-                <div style="display: flex; flex-direction: column; gap: 3px;">
-                  <div style="font-family: 'Lora', serif; font-weight: 600; font-size: 16px; color: #5E1F39;">Cinta Foundation ID</div>
-                  <div style="font-weight: 300; font-size: 13px; letter-spacing: 0.04em; color: #2A1820;">NMID: ID1025412604759 · 3326968</div>
-                </div>
-                <div style="font-weight: 300; font-size: 13.5px; line-height: 1.6; color: #2A1820;">Scan dengan aplikasi apa pun yang berlogo QRIS.</div>
-              </div>
-            </div>
-            <p style="font-weight: 300; font-size: 14.5px; line-height: 1.75; color: #2A1820; margin: 0; max-width: 620px; text-wrap: pretty;">Setelah menitipkan, kirimkan bukti transfer ke <a href="mailto:admin@cintafoundation.org" style="color: #7B2F4D;">admin@cintafoundation.org</a> agar kami bisa mencatat dan mengonfirmasinya.</p>
-          </div>
-
-          <!-- STEP 6 — Konfirmasi -->
-          <div class="t-step" data-step="6" style="display: flex; flex-direction: column; gap: 24px;">
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-              <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: #A0793F;">Langkah 06</div>
-              <h2 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(26px, 3.4vw, 34px); color: #5E1F39; margin: 0;">Ringkasan titipanmu</h2>
-            </div>
-            <dl style="margin: 0; display: flex; flex-direction: column; gap: 0;">
-                  ${summaryRows}
-            </dl>
-            <p style="font-family: 'Lora', serif; font-style: italic; font-size: 17px; line-height: 1.7; color: #7B2F4D; margin: 0; max-width: 560px; text-wrap: pretty;">Terima kasih. Titipanmu akan kami catat, salurkan, dan laporkan.</p>
-            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-              <a class="as-btn hv-fill" href="/laporan" style="font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; color: #7B2F4D; background: transparent; border: 1.5px solid rgba(123,47,77,0.5); padding: 14px 28px; border-radius: 999px; cursor: pointer; transition: all 0.2s ease;">Lihat Laporan Kegiatan →</a>
-              <button type="button" data-flow-reset style="font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 400; color: #7B2F4D; background: none; border: 0; text-decoration: underline; cursor: pointer; padding: 14px 4px;">Mulai titipan baru</button>
-            </div>
-          </div>
-
-          <!-- Nav buttons -->
-          <div class="flow-nav" data-flow-nav style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; padding-top: 8px;">
-            <button type="button" class="flow-back is-off hv-fill" data-flow-back style="font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; color: #7B2F4D; background: transparent; border: 1.5px solid rgba(123,47,77,0.5); padding: 14px 28px; border-radius: 999px; cursor: pointer; transition: all 0.2s ease;">← Kembali</button>
-            <button type="button" class="hv-deep" data-flow-next style="font-family: 'Poppins', sans-serif; font-size: 14.5px; font-weight: 500; color: #F7F3EC; background: #7B2F4D; border: 0; padding: 15px 34px; border-radius: 999px; cursor: pointer; letter-spacing: 0.03em; transition: background 0.2s ease;">Lanjut →</button>
-          </div>
-
         </div>
       </section>
 

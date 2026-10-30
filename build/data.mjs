@@ -74,13 +74,16 @@ export const FAQS = [
   { q: 'Bagaimana saya bisa terlibat selain berdonasi?', a: 'Kalau punya keahlian atau komunitas yang ingin berkolaborasi, hubungi kami di admin@cintafoundation.org. Program relawan sedang kami siapkan.' }
 ];
 
+// Pilihan Titip Cinta: one card per entry on /titip-cinta. Add a row to open a
+// new program. `category` must match a REPORTS category; the newest report in
+// it supplies the card's "terakhir disalurkan" date. `image` is the card's
+// thumbnail (the same poster the donation page opens with).
 export const TITIP_PROGRAMS = [
-  { key: 'jumat', title: 'Jumat Berkah', desc: 'Makanan yang dibeli, dikemas, dan diantarkan langsung ke tangan penerima.' },
-  { key: 'paling', title: 'Biarkan kami menyalurkan', desc: 'Kami antarkan ke tempat yang paling membutuhkan saat titipanmu masuk.' }
+  { key: 'jumat', eyebrow: 'Program Rutin', title: 'Jumat Berkah', category: 'Jumat Berkah',
+    image: 'donasi-jb-poster.jpg', imageAlt: 'Poster Jumat Berkah Cinta Foundation: Seporsi Nasi, Sepenuh Berkah',
+    desc: 'Makanan yang dibeli, dikemas, dan diantarkan langsung ke tangan penerima di jalan dan ruang publik.',
+    href: '/donasi/jumat-berkah', cta: 'Titip Cinta' }
 ];
-export const TITIP_AMOUNTS = ['Rp 25.000', 'Rp 50.000', 'Rp 100.000', 'Rp 250.000'];
-export const TITIP_RECIPIENTS = ['Orang Tua', 'Guru', 'Teman', 'Orang Lain'];
-export const RAIL_LABELS = ['Program', 'Nominal', 'Identitas', 'Titipan', 'Pembayaran', 'Konfirmasi'];
 
 export const LAP_FILTERS = ['Semua', 'Jumat Berkah', 'Komunitas', 'Santunan'];
 
