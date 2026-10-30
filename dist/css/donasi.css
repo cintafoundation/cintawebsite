@@ -45,6 +45,8 @@
 .dl-bank { background: var(--wine); color: var(--cream); border-radius: 20px; padding: 24px 20px; width: 100%; display: flex; flex-direction: column; gap: 6px; }
 .dl-bank .dl-kicker { color: var(--gold); }
 .dl-bank-name { font-family: 'Lora', serif; font-weight: 600; font-size: 20px; }
+.dl-bank-code { font-size: 13px; line-height: 1.5; color: var(--blush); opacity: 0.9; }
+.dl-bank-code b { font-weight: 500; color: var(--cream); }
 .dl-rek { font-family: 'Lora', serif; font-size: 28px; letter-spacing: 0.08em; color: var(--blush); }
 .dl-an { font-size: 13.5px; color: var(--blush); }
 .dl-an b { font-weight: 500; color: var(--cream); }

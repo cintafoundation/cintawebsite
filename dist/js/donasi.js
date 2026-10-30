@@ -70,7 +70,9 @@
   if (box && sticky && 'IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
       var e = entries[0];
-      sticky.classList.toggle('is-on', !e.isIntersecting && e.boundingClientRect.top < 0);
+      // Shown whenever the donation box is off-screen — including while the
+      // reader is still above it, which is where the decision is made.
+      sticky.classList.toggle('is-on', !e.isIntersecting);
     }).observe(box);
   }
 })();
