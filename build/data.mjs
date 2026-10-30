@@ -316,11 +316,52 @@ export const jb02oktArticle = {
   }
 };
 
+// 16 Oktober 2026 — photo-led with a closing collage, same pattern as
+// 2 Oktober. Copy, captions and alt text are verbatim from
+// INSTRUKSI_CLAUDE_CODE_16_OKTOBER.md and must not be reworded. Image 2 is
+// only 380px wide, so it is capped at its native width. No
+// documentation-link block, by instruction.
+export const jb16oktArticle = {
+  layout: 'photo',
+  blocks: [
+    { isPhoto: true, name: 'jumat-berkah-16okt-cover', w: 642, h: 1146, maxW: '640px', eager: true,
+      alt: 'Pedagang keliling bertopi tersenyum sambil memegang nasi kotak di samping gerobaknya',
+      caption: 'Seorang pedagang keliling tersenyum memegang nasi kotak di samping gerobaknya.' },
+    P('Jumat, 16 Oktober 2026, sekitar pukul setengah sepuluh pagi, Jumat Berkah kembali berjalan di kawasan Mega Kuningan, Jakarta Selatan. Rutenya menyusuri jalan besar sampai gang-gang kecil di sekitarnya.'),
+    { isPhoto: true, name: 'jumat-berkah-16okt-penyerahan', w: 380, h: 584, maxW: '380px',
+      alt: 'Relawan membungkuk menyerahkan nasi kotak kepada seorang bapak lanjut usia yang duduk di tepi jalan',
+      caption: 'Di satu tepi jalan, relawan membungkuk untuk menyerahkan nasi kotak kepada bapak yang sedang duduk.' },
+    P('Tiga belas porsi nasi ayam bakar kami bawa pagi itu, masing-masing dengan tempe, lalapan, dan sambal. Kotak-kotaknya disiapkan sebelum berangkat.'),
+    P('Di sepanjang rute, nasi kotak itu sampai ke tangan seorang pedagang keliling di samping gerobaknya, petugas PPSU di dekat pagar seng, petugas kebersihan di trotoar, pengemudi ojek daring yang sedang beristirahat di pinggir jalan, dan beberapa bapak di mulut gang.'),
+    { isPhoto: true, name: 'jumat-berkah-16okt-petugas', w: 648, h: 1006, maxW: '460px',
+      alt: 'Seorang pekerja berseragam biru tersenyum sambil memegang nasi kotak',
+      caption: 'Seorang pekerja berseragam biru menerima nasi kotak di sela tugasnya.' },
+    P('Jumat Berkah berjalan dua pekan sekali sejak Agustus 2025. Terima kasih untuk setiap nama yang ikut menitipkan rezekinya pekan ini. Sampai jumpa di Jumat Berkah berikutnya. Salam.')
+  ],
+  kolase: {
+    name: 'jumat-berkah-16okt-kolase', w: 1608, h: 2127,
+    alt: 'Kolase sembilan foto: dua foto persiapan nasi kotak, petugas kebersihan, petugas PPSU, pengemudi ojek daring, dan beberapa pekerja menerima nasi kotak di jalan',
+    caption: 'Sepanjang rute pagi itu, dari persiapan nasi kotak sebelum berangkat hingga gang dan tepi jalan di sekitar Mega Kuningan.'
+  }
+};
+
 // ------------------------------------------------------------ report index
 // `url` null  => no standalone page (report still listed in the archive).
 // Ordered newest first, matching the source's date sort.
 
 export const REPORTS = [
+  {
+    slug: 'jumat-berkah-16-oktober-2026', url: '/laporan/jumat-berkah-16-oktober-2026',
+    date: '2026-10-16', category: 'Jumat Berkah',
+    title: 'Lihat Laporan: Jumat Berkah 16 Oktober 2026',
+    heading: 'Jumat Berkah Menyusuri Gang dan Tepi Jalan Mega Kuningan',
+    seoTitle: 'Jumat Berkah 16 Oktober 2026 — Laporan | Cinta Foundation',
+    seoDescription: 'Laporan Jumat Berkah 16 Oktober 2026: 13 porsi nasi ayam bakar dibagikan di gang dan tepi jalan sekitar Mega Kuningan, Jakarta Selatan.',
+    preview: 'Laporan Jumat Berkah 16 Oktober 2026: 13 porsi nasi ayam bakar dibagikan di gang dan tepi jalan sekitar Mega Kuningan, Jakarta Selatan.',
+    image: 'jumat-berkah-16okt-og.jpg', ogImage: 'jumat-berkah-16okt-og.jpg', focus: 'center',
+    alt: 'Pedagang keliling bertopi tersenyum sambil memegang nasi kotak di samping gerobaknya',
+    full: true, article: 'jb16okt'
+  },
   {
     slug: 'jumat-berkah-2-oktober-2026', url: '/laporan/jumat-berkah-2-oktober-2026',
     date: '2026-10-02', category: 'Jumat Berkah',
@@ -401,4 +442,4 @@ export const REPORTS = [
   }
 ];
 
-export const ARTICLES = { jb17: jbArticle, jb31: jb31Article, bb: bbArticle, jb28: jb28Article, jb18sep: jb18sepArticle, jb02okt: jb02oktArticle };
+export const ARTICLES = { jb17: jbArticle, jb31: jb31Article, bb: bbArticle, jb28: jb28Article, jb18sep: jb18sepArticle, jb02okt: jb02oktArticle, jb16okt: jb16oktArticle };
