@@ -78,3 +78,34 @@ body.menu-open { overflow: hidden; }
 
 /* The archive filter row hides its scrollbar, as in the source. */
 .filter-rail::-webkit-scrollbar { display: none; }
+
+/* Homepage split hero: copy left, arch photo with two polaroids right. */
+.hero-grid { position: relative; max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: clamp(36px, 6vw, 88px); align-items: center; }
+.hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.hero-media { position: relative; margin: 0; width: 100%; max-width: 440px; justify-self: center; }
+.hero-arch { aspect-ratio: 4 / 5; border-radius: 220px 220px 26px 26px; overflow: hidden; border: 1px solid rgba(200,160,99,0.45); background: #F3E4E8; box-shadow: 0 34px 64px -34px rgba(94,31,57,0.5); }
+.hero-arch img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Floating cards: each is a different person receiving a meal. --r is the tilt,
+   kept in a variable so the gentle float animation can reuse it. */
+.hero-card { position: absolute; margin: 0; width: 31%; background: #FFFDF9; padding: 6px; border-radius: 8px; box-shadow: 0 20px 38px -18px rgba(42,24,32,0.5); transform: rotate(var(--r, 0deg)); animation: heroFloat 7s ease-in-out infinite; }
+.hero-card img { display: block; width: 100%; aspect-ratio: 4 / 5; height: auto; object-fit: cover; border-radius: 4px; }
+.hero-card--1 { --r: -7deg; left: -19%; top: 4%; }
+.hero-card--2 { --r: 6deg; right: -17%; top: 14%; width: 28%; animation-delay: -2s; }
+.hero-card--3 { --r: 5deg; left: -15%; bottom: 3%; width: 28%; animation-delay: -4s; }
+.hero-card--4 { --r: -5deg; right: -19%; bottom: -4%; animation-delay: -5.5s; }
+@keyframes heroFloat { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-7px) rotate(var(--r, 0deg)); } }
+@media (prefers-reduced-motion: reduce) { .hero-card { animation: none; } }
+@media (max-width: 860px) {
+  /* Phones see the photo first, so the first screen shows people, not just text. */
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .hero-media { order: -1; max-width: 220px; margin-top: 6px; }
+  .hero-card { width: 36%; padding: 4px; }
+  .hero-card--2, .hero-card--3 { width: 33%; }
+  .hero-card--1 { left: -30%; }
+  .hero-card--2 { right: -28%; }
+  .hero-card--3 { left: -27%; }
+  .hero-card--4 { right: -30%; }
+}
+@media (max-width: 420px) {
+  .hero-btn { padding-left: 22px !important; padding-right: 22px !important; }
+}

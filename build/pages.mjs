@@ -5,7 +5,7 @@ import { esc } from './chrome.mjs';
 import {
   PILLARS, FRAMEWORK, PROGRAM_ARCHIVE, MISSIONS, FAQS,
   TITIP_PROGRAMS,
-  LAP_FILTERS, REPORTS, ARTICLES
+  LAP_FILTERS, REPORTS, ARTICLES, HERO
 } from './data.mjs';
 
 const A = (name) => `/assets/${name}`;
@@ -31,6 +31,9 @@ const FILTER_BASE = "font-family: 'Poppins', sans-serif; font-size: 13.5px; lett
 /* ================================================================ BERANDA */
 
 export function beranda() {
+  const heroCards = HERO.cards.map((c, i) =>
+    `<figure class="hero-card hero-card--${i + 1}"><img src="${A(c.image)}" alt="${esc(c.alt)}"${dim(c.image)} decoding="async"></figure>`
+  ).join('\n            ');
   const pillars = PILLARS.map((p) => {
     const card = CARD_BASE + (p.dark
       ? ' background: #5E1F39; border: 1px solid rgba(200,160,99,0.3);'
@@ -60,12 +63,21 @@ export function beranda() {
     <main style="flex: 1;">
 
       <!-- Hero -->
-      <section style="position: relative; padding: clamp(84px, 12vw, 150px) 32px clamp(72px, 9vw, 110px); text-align: center; overflow: clip;">
-        <div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(52% 46% at 50% 18%, rgba(243,228,232,0.95) 0%, rgba(243,228,232,0) 100%), radial-gradient(30% 30% at 82% 68%, rgba(200,160,99,0.16) 0%, rgba(200,160,99,0) 100%), radial-gradient(26% 30% at 12% 60%, rgba(201,125,144,0.14) 0%, rgba(201,125,144,0) 100%); animation: drift 14s ease-in-out infinite;"></div>
-        <div style="position: relative; max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 30px;">
-          <h1 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(48px, 8vw, 88px); line-height: 1.04; letter-spacing: -0.015em; color: #5E1F39; margin: 0; text-wrap: balance; animation: fadeUp 0.7s ease 0.12s both;">Ada banyak cara<br><em style="font-style: italic; color: #7B2F4D;">mencintai.</em></h1>
-          <p style="font-family: 'Lora', serif; font-style: italic; font-size: clamp(17px, 2vw, 21px); line-height: 1.65; color: #2A1820; max-width: 600px; margin: 0; text-wrap: pretty; animation: fadeUp 0.7s ease 0.24s both;">Di sini, cinta disalurkan dalam bentuk makanan hangat dua pekan sekali di hari Jumat, dukungan dan pemberdayaan anak dan perempuan, serta kepekaan untuk hadir saat dibutuhkan.</p>
-          <a class="as-btn hv-deep" href="/program" style="margin-top: 10px; font-family: 'Poppins', sans-serif; font-size: 14.5px; font-weight: 500; color: #F7F3EC; background: #7B2F4D; border: 0; padding: 17px 38px; border-radius: 999px; cursor: pointer; letter-spacing: 0.03em; transition: background 0.2s ease; animation: fadeUp 0.7s ease 0.36s both;">Kenali Cara Kami →</a>
+      <section class="hero-split" style="position: relative; padding: clamp(40px, 6vw, 88px) 24px clamp(64px, 8vw, 104px); overflow: clip;">
+        <div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(52% 46% at 30% 18%, rgba(243,228,232,0.95) 0%, rgba(243,228,232,0) 100%), radial-gradient(30% 30% at 82% 68%, rgba(200,160,99,0.16) 0%, rgba(200,160,99,0) 100%), radial-gradient(26% 30% at 12% 60%, rgba(201,125,144,0.14) 0%, rgba(201,125,144,0) 100%); animation: drift 14s ease-in-out infinite;"></div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(42px, 5.3vw, 72px); line-height: 1.04; letter-spacing: -0.015em; color: #5E1F39; margin: 0; text-wrap: balance; animation: fadeUp 0.7s ease 0.12s both;">Ada banyak cara<br><em style="font-style: italic; color: #7B2F4D;">mencintai.</em></h1>
+            <p style="font-family: 'Lora', serif; font-style: italic; font-size: clamp(17px, 1.8vw, 20px); line-height: 1.65; color: #2A1820; max-width: 520px; margin: 0; text-wrap: pretty; animation: fadeUp 0.7s ease 0.24s both;">Di sini, cinta disalurkan dalam bentuk makanan hangat dua pekan sekali di hari Jumat, dukungan dan pemberdayaan anak dan perempuan, serta kepekaan untuk hadir saat dibutuhkan.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; animation: fadeUp 0.7s ease 0.36s both;">
+              <a class="as-btn hv-deep hero-btn" href="/titip-cinta" style="font-family: 'Poppins', sans-serif; font-size: 14.5px; font-weight: 500; color: #F7F3EC; background: #7B2F4D; border: 0; padding: 16px 34px; border-radius: 999px; letter-spacing: 0.03em; text-decoration: none; transition: background 0.2s ease;">Titip Cinta →</a>
+              <a class="as-btn hv-fill hero-btn" href="/laporan" style="font-family: 'Poppins', sans-serif; font-size: 14.5px; font-weight: 500; color: #7B2F4D; background: transparent; border: 1.5px solid rgba(123,47,77,0.45); padding: 14.5px 30px; border-radius: 999px; letter-spacing: 0.03em; text-decoration: none; transition: all 0.2s ease;">Lihat Laporan</a>
+            </div>
+          </div>
+          <figure class="hero-media">
+            <div class="hero-arch"><img src="${A(HERO.main.image)}" alt="${esc(HERO.main.alt)}"${dim(HERO.main.image)} fetchpriority="high" decoding="async" style="object-position: ${HERO.main.focus};"></div>
+            ${heroCards}
+          </figure>
         </div>
       </section>
 

@@ -74,6 +74,24 @@ export const FAQS = [
   { q: 'Bagaimana saya bisa terlibat selain berdonasi?', a: 'Kalau punya keahlian atau komunitas yang ingin berkolaborasi, hubungi kami di admin@cintafoundation.org. Program relawan sedang kami siapkan.' }
 ];
 
+// Homepage hero (split layout): one main photo plus floating cards, all
+// handover moments from Jumat Berkah footage. Real stills only; skip any frame
+// where a name tape or ID card is readable.
+export const HERO = {
+  main: { image: 'hero-berbagi-warung.jpg', focus: 'center 30%',
+    alt: 'Pemilik warung tersenyum menerima paket makanan Jumat Berkah dari relawan' },
+  cards: [
+    { image: 'hero-card-pikulan.jpg',
+      alt: 'Pedagang pikulan menerima paket makanan dari relawan' },
+    { image: 'hero-card-galon.jpg',
+      alt: 'Sopir galon mengacungkan jempol sambil membawa paket makanan' },
+    { image: 'hero-card-sepeda.jpg',
+      alt: 'Seorang ibu bersepeda menerima paket makanan dari relawan' },
+    { image: 'hero-card-pengamen.jpg',
+      alt: 'Pengamen tersenyum membawa gitar dan paket makanan' }
+  ]
+};
+
 // Pilihan Titip Cinta: one card per entry on /titip-cinta. Add a row to open a
 // new program. `category` must match a REPORTS category; the newest report in
 // it supplies the card's "terakhir disalurkan" date. `image` is the card's

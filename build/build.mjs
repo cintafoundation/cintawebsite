@@ -2,6 +2,7 @@
 // nothing for the host to build. Run: node build/build.mjs [--domain=example.org]
 import { mkdir, writeFile, copyFile, readFile, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { head, headers, footer, landingHeader, landingFooter, esc } from './chrome.mjs';
@@ -159,10 +160,20 @@ async function run() {
   await copyFile(path.join(ROOT, 'build/static/donasi.css'), path.join(DIST, 'css/donasi.css'));
   await copyFile(path.join(ROOT, 'build/static/donasi.js'), path.join(DIST, 'js/donasi.js'));
 
+  // Cache busting: CSS and JS are cached for a week, so every page links them
+  // with a short content hash. A changed file gets a new URL on the next deploy.
+  const STATIC = ['css/site.css', 'js/site.js', 'css/donasi.css', 'js/donasi.js'];
+  const version = {};
+  for (const f of STATIC) {
+    version[f] = createHash('sha256').update(await readFile(path.join(DIST, f))).digest('hex').slice(0, 10);
+  }
+  const versioned = (html) => html.replace(/(href|src)="\/(css\/site\.css|js\/site\.js|css\/donasi\.css|js\/donasi\.js)"/g,
+    (m, attr, f) => `${attr}="/${f}?v=${version[f]}"`);
+
   const problems = [];
 
   for (const p of SITE) {
-    const html =
+    const html = versioned(
       head({
         domain: DOMAIN, url: p.url, title: p.title, description: p.description,
         ogType: p.ogType || 'website', ogImage: p.ogImage, schema: p.schema ? p.schema() : '',
@@ -170,7 +181,7 @@ async function run() {
       }) +
       (p.landing ? landingHeader() : headers(p.nav)) +
       p.body() +
-      (p.landing ? landingFooter('donasi.js') : footer());
+      (p.landing ? landingFooter('donasi.js') : footer()));
 
     const out = path.join(DIST, p.file);
     await mkdir(path.dirname(out), { recursive: true });
