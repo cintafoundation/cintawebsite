@@ -109,3 +109,31 @@ body.menu-open { overflow: hidden; }
 @media (max-width: 420px) {
   .hero-btn { padding-left: 22px !important; padding-right: 22px !important; }
 }
+
+/* Jumat Berkah reports in the locked style (style-laporan-jumat-berkah.md,
+   25 Nov 2026). Opt-in per article with `locked: true` and `frame` on photos. */
+.lp-card, .lp-arch { position: relative; overflow: hidden; border-radius: 28px; background: #F3E4E8;
+  box-shadow: 0 1px 2px rgba(94,31,57,.06), 0 3px 6px rgba(94,31,57,.06), 0 8px 16px rgba(94,31,57,.07), 0 18px 36px rgba(94,31,57,.09), 0 36px 72px rgba(94,31,57,.11), 0 64px 128px rgba(94,31,57,.13); }
+.lp-card::after, .lp-arch::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 34%); }
+.lp-card img, .lp-arch img { display: block; width: 100%; height: auto; }
+.lp-arch { border-radius: 50% 50% 28px 28px / 36% 36% 28px 28px; outline: 1.5px solid rgba(160,121,63,.55); outline-offset: 9px; margin: 10px 0 0 10px; }
+.lp-rule { display: block; width: 60px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, #C8A063 0%, rgba(200,160,99,0) 100%); }
+.lp-meta { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 400; color: #6A4A57; margin-top: -8px; }
+.lp-gold { background: linear-gradient(90deg, #86602C 0%, #9C7339 28%, #B08446 50%, #9C7339 72%, #86602C 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lp-angka { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; margin: 26px 0; padding: clamp(28px, 4vw, 40px) 20px;
+  background: radial-gradient(60% 70% at 50% 45%, rgba(243,228,232,.95) 0%, rgba(243,228,232,.5) 54%, rgba(243,228,232,0) 100%); }
+.lp-angka-num { font-family: 'Lora', serif; font-weight: 600; font-size: clamp(96px, 16vw, 156px); line-height: .95; letter-spacing: -0.02em;
+  background: linear-gradient(180deg, #8A3558 0%, #7B2F4D 45%, #5E1F39 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lp-angka-label { font-family: 'Lora', serif; font-style: italic; font-weight: 500; font-size: clamp(19px, 2.4vw, 24px); color: #7B2F4D; }
+.lp-angka .lp-rule { margin: 4px auto 0; background: linear-gradient(90deg, rgba(200,160,99,0) 0%, #C8A063 50%, rgba(200,160,99,0) 100%); }
+.lp-angka-line { font-family: 'Poppins', sans-serif; font-weight: 300; font-size: 14.5px; line-height: 1.7; color: #6A4A57; margin: 0; max-width: 520px; }
+.lp-docs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 6px; }
+.lp-docs .lp-card { border-radius: 20px; }
+.lp-docs img { aspect-ratio: 3 / 4; object-fit: cover; }
+@media (max-width: 640px) {
+  .lp-card, .lp-arch { border-radius: 22px; }
+  .lp-arch { border-radius: 50% 50% 22px 22px / 36% 36% 22px 22px; }
+  .lp-docs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .lp-docs .lp-card { border-radius: 16px; }
+}

@@ -532,7 +532,7 @@ export function laporan() {
       : `<div style="aspect-ratio: 4 / 3; border-radius: 14px; background: #F3E4E8; border: 1px solid rgba(200,160,99,0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 20px;">
                 <div role="img" aria-label="Logo Cinta Foundation" style="width: 40%; max-width: 110px; aspect-ratio: 1 / 1; background-image: url('${A('logo-wine.png')}'); background-size: contain; background-repeat: no-repeat; background-position: center; opacity: 0.55;"></div>
               </div>`;
-    // The 14 Agustus report has no standalone page yet, so its title is not a link.
+    // A report with `url: null` has no standalone page yet, so its title is not a link.
     const title = it.url
       ? `<a class="hv-wine" href="${it.url}" style="${titleStyle}">${esc(it.title)}</a>`
       : `<span style="${titleStyle}">${esc(it.title)}</span>`;
@@ -606,12 +606,21 @@ function blocks(list) {
       // Explicit width/height on the <img> so the box is reserved before the
       // file lands; the cover is eager, the two below it lazy.
       return `<figure style="margin: 14px 0; display: flex; flex-direction: column; gap: 8px;">
-                    <picture style="display: block; width: 100%; max-width: ${b.maxW};">
+                    <picture${b.frame ? ` class="lp-${b.frame}"` : ''} style="display: block; width: 100%; max-width: ${b.maxW};">
                       <source srcset="${A(b.name + '.webp')}" type="image/webp">
-                      <img src="${A(b.name + '.jpg')}" alt="${esc(b.alt)}" width="${b.w}" height="${b.h}"${b.eager ? '' : ' loading="lazy"'} decoding="async" style="width: 100%; height: auto; display: block; border-radius: 22px;">
+                      <img src="${A(b.name + '.jpg')}" alt="${esc(b.alt)}" width="${b.w}" height="${b.h}"${b.eager ? '' : ' loading="lazy"'} decoding="async" style="width: 100%; height: auto; display: block;${b.frame ? '' : ' border-radius: 22px;'}">
                     </picture>
                     <figcaption style="font-weight: 300; font-size: 12.5px; line-height: 1.6; color: #74656A; max-width: ${b.maxW};">${esc(b.caption)}</figcaption>
                   </figure>`;
+    }
+    if (b.isAngka) {
+      // Locked style "Angka": one big number, an italic label, a gold rule.
+      return `<div class="lp-angka">
+                    <div class="lp-angka-num">${esc(b.value)}</div>
+                    <div class="lp-angka-label">${esc(b.label)}</div>
+                    <span class="lp-rule" aria-hidden="true"></span>${b.line ? `
+                    <p class="lp-angka-line">${esc(b.line)}</p>` : ''}
+                  </div>`;
     }
     if (b.isFigure) {
       const maxW = b.maxW || '100%';
@@ -622,6 +631,17 @@ function blocks(list) {
     }
     return '';
   }).join('\n                ');
+}
+
+/* Locked-style documentation: rows of photo cards under "Dari tangan ke tangan". */
+function docs(list) {
+  if (!list || !list.length) return '';
+  return `
+                <hr style="width: 100%; margin: 26px 0 8px; border: 0; border-top: 1px solid rgba(200,160,99,0.4);">
+                <h2 style="font-family: 'Lora', serif; font-weight: 600; font-size: clamp(26px, 3.4vw, 34px); line-height: 1.15; letter-spacing: -0.01em; color: #5E1F39; margin: 0;">Dari tangan <span class="lp-gold">ke tangan</span></h2>
+                <div class="lp-docs">
+                  ${list.map((ph) => `<picture class="lp-card"><source srcset="${A(ph.name + '.webp')}" type="image/webp"><img src="${A(ph.name + '.jpg')}" alt="${esc(ph.alt)}" width="${ph.w}" height="${ph.h}" loading="lazy" decoding="async"></picture>`).join('\n                  ')}
+                </div>`;
 }
 
 /* Optional closing collage on a photo-led report: a divider, an <h2>, and one
@@ -646,10 +666,12 @@ function photoReport(rep, art) {
           <a class="hv-deeptext" href="/laporan" style="align-self: flex-start; font-family: 'Poppins', sans-serif; font-size: 13.5px; font-weight: 400; color: #7B2F4D; background: none; border: 0; padding: 0; cursor: pointer; letter-spacing: 0.02em; text-decoration: none;">← Laporan Kegiatan</a>
           <div style="font-family: 'Poppins', sans-serif; font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #A0793F;">${esc(rep.category)}</div>
           <h1 style="font-family: 'Lora', serif; font-weight: 500; font-size: clamp(32px, 4.6vw, 48px); line-height: 1.12; letter-spacing: -0.015em; color: #5E1F39; margin: 0; text-wrap: pretty;">${esc(rep.heading)}</h1>
+          ${art.locked ? `<span class="lp-rule" aria-hidden="true"></span>
+          <div class="lp-meta">${esc(tanggalID(rep.date))} · ${esc(art.place)}</div>` : ''}
         </div>
 
         <div style="max-width: 720px; margin: 32px auto 0; width: 100%; display: flex; flex-direction: column; gap: 22px;">
-                ${blocks(art.blocks)}${kolase(art.kolase)}
+                ${blocks(art.blocks)}${kolase(art.kolase)}${docs(art.docs)}
         </div>
       </section>
     </main>

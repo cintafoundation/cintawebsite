@@ -366,6 +366,108 @@ export const jb16oktArticle = {
   }
 };
 
+// 30 Oktober 2026 — locked Jumat Berkah style (style-laporan-jumat-berkah.md,
+// 25 Nov 2026): photo cards with tinted shadow, arch story photo, one big
+// number, documentation as rows of cards. Copy from confirmed facts only
+// (owner, 13 Nov: 13 paket nasi ayam goreng + sayur lalapan + air mineral;
+// recipients as in the Instagram caption). No time of day, no quotes.
+// Photos are real stills from the 30 Oktober footage; name tapes blurred.
+export const jb30oktArticle = {
+  layout: 'photo', locked: true, place: 'Mega Kuningan, Jakarta Selatan',
+  blocks: [
+    { isPhoto: true, frame: 'card', name: 'jumat-berkah-30okt-cover', w: 720, h: 900, maxW: '640px', eager: true,
+      alt: 'Seorang ibu bertopi merah muda tersenyum di samping sepedanya saat menerima paket makanan dari relawan',
+      caption: 'Seorang ibu berhenti sebentar dari sepedanya untuk menerima paket.' },
+    P('Jumat pagi, 30 Oktober 2026, Jumat Berkah kembali berkeliling di sekitar Mega Kuningan, Jakarta Selatan.'),
+    { isPhoto: true, frame: 'arch', name: 'jumat-berkah-30okt-isi', w: 600, h: 750, maxW: '420px',
+      alt: 'Nasi kotak berisi nasi, ayam goreng, dan sayur lalapan',
+      caption: 'Isi paket pagi itu: nasi, ayam goreng, dan sayur lalapan.' },
+    { isAngka: true, value: '13', label: 'paket nasi ayam goreng tersalurkan', line: 'Lengkap dengan sayur lalapan dan air mineral.' },
+    P('Paket-paket itu sampai ke bapak penjual selendang mayang yang sedang memikul dagangannya, petugas kebersihan yang baru selesai menyapu, ibu yang berhenti sebentar dari sepedanya, bapak bermotor, kakak-kakak kasir minimarket yang sedang berjaga, serta ibu dan bapak pemilik warung.'),
+    { isPhoto: true, frame: 'card', name: 'jumat-berkah-30okt-pikulan', w: 600, h: 750, maxW: '460px',
+      alt: 'Penjual pikulan berhanduk merah muda tertawa di samping pikulan dagangannya',
+      caption: 'Bapak penjual selendang mayang, di samping pikulan dagangannya.' },
+    P('Jumat Berkah berjalan dua pekan sekali sejak Agustus 2025. Terima kasih untuk setiap nama yang ikut menitipkan rezekinya pekan ini. Sampai jumpa di Jumat Berkah berikutnya. Salam.')
+  ],
+  docs: [
+    { name: 'jumat-berkah-30okt-dok-1', w: 480, h: 640, alt: 'Relawan mengemas nasi kotak sebelum berangkat' },
+    { name: 'jumat-berkah-30okt-dok-2', w: 480, h: 640, alt: 'Paket makanan dalam kantong plastik, siap dibagikan' },
+    { name: 'jumat-berkah-30okt-dok-3', w: 480, h: 640, alt: 'Bapak bermotor tersenyum memegang paket makanan' },
+    { name: 'jumat-berkah-30okt-dok-4', w: 480, h: 640, alt: 'Pemilik warung menerima paket makanan dari relawan' },
+    { name: 'jumat-berkah-30okt-dok-5', w: 480, h: 640, alt: 'Ibu pemilik warung tersenyum memegang paket makanan' },
+    { name: 'jumat-berkah-30okt-dok-6', w: 480, h: 640, alt: 'Dua kasir minimarket tersenyum menerima paket makanan' },
+    { name: 'jumat-berkah-30okt-dok-7', w: 480, h: 640, alt: 'Penjual pikulan menerima paket makanan dari relawan' },
+    { name: 'jumat-berkah-30okt-dok-8', w: 480, h: 640, alt: 'Petugas kebersihan berseragam biru tersenyum memegang paket makanan' }
+  ]
+};
+
+// 13 November 2026 — same locked style. Copy from confirmed facts only
+// (B, 25 Nov: JUMLAH = 13; recipients as in the TikTok caption and the web
+// report). Menu is not confirmed, so it is not described. Photos are the
+// blurred stills from Program/Images/laporan-jumat-berkah-13-november-2026.
+export const jb13novArticle = {
+  layout: 'photo', locked: true, place: 'Mega Kuningan, Jakarta Selatan',
+  blocks: [
+    { isPhoto: true, frame: 'card', name: 'jumat-berkah-13nov-cover', w: 720, h: 900, maxW: '640px', eager: true,
+      alt: 'Seorang pengamen bertopi tersenyum memegang gitar dan paket makanan di depan pagar',
+      caption: 'Seorang bapak pengamen menerima paket sambil tetap memegang gitarnya.' },
+    P('Jumat pagi, 13 November 2026, Jumat Berkah kembali berkeliling di sekitar Mega Kuningan, Jakarta Selatan, menemui mereka yang sudah bekerja sejak pagi.'),
+    { isPhoto: true, frame: 'arch', name: 'jumat-berkah-13nov-mengemas', w: 600, h: 750, maxW: '420px',
+      alt: 'Relawan mengemas paket makanan ke dalam kantong plastik di samping tumpukan nasi kotak',
+      caption: 'Paket disiapkan relawan sebelum berangkat.' },
+    { isAngka: true, value: '13', label: 'paket nasi kotak tersalurkan' },
+    P('Penerimanya petugas kebersihan di pinggir jalan, pedagang keliling, bapak pengamen yang sedang memetik gitarnya, sopir galon di parkiran basement, kasir minimarket, dan warga yang kami temui di jalan.'),
+    { isPhoto: true, frame: 'card', name: 'jumat-berkah-13nov-galon', w: 600, h: 750, maxW: '460px',
+      alt: 'Sopir galon mengacungkan jempol sambil membawa paket makanan di parkiran basement',
+      caption: 'Di parkiran basement, seorang sopir galon menerima paketnya.' },
+    P('Jumat Berkah berjalan dua pekan sekali sejak Agustus 2025. Terima kasih untuk setiap nama yang ikut menitipkan rezekinya pekan ini. Sampai jumpa di Jumat Berkah berikutnya. Salam.')
+  ],
+  docs: [
+    { name: 'jumat-berkah-13nov-dok-1', w: 480, h: 640, alt: 'Relawan memasukkan nasi kotak ke dalam kantong plastik' },
+    { name: 'jumat-berkah-13nov-dok-2', w: 480, h: 640, alt: 'Isi nasi kotak: nasi, lauk, dan sayur' },
+    { name: 'jumat-berkah-13nov-dok-3', w: 480, h: 640, alt: 'Petugas kebersihan memegang paket makanan di trotoar' },
+    { name: 'jumat-berkah-13nov-dok-4', w: 480, h: 640, alt: 'Petugas kebersihan tersenyum memegang paket makanan' },
+    { name: 'jumat-berkah-13nov-dok-5', w: 480, h: 640, alt: 'Petugas kebersihan bertopi memegang paket makanan' },
+    { name: 'jumat-berkah-13nov-dok-6', w: 480, h: 640, alt: 'Pedagang keliling menerima paket makanan dari relawan' },
+    { name: 'jumat-berkah-13nov-dok-7', w: 480, h: 640, alt: 'Kasir minimarket memegang paket makanan' },
+    { name: 'jumat-berkah-13nov-dok-8', w: 480, h: 640, alt: 'Relawan menyerahkan paket makanan kepada seorang pekerja di kantor' }
+  ]
+};
+
+// 14 Agustus 2026 — locked style, like 30 Oktober and 13 November. The
+// number of paket and the menu were never confirmed, so there is no big
+// number block and no menu line; copy describes only what the footage shows.
+// Location from the Drive folder "Jakarta Selatan - Mega Kuningan / 07. 14
+// August 2026". Stills tone-mapped from that footage; the guard's name and
+// employer badges and a bus plate are blurred.
+export const jb14aguArticle = {
+  layout: 'photo', locked: true, place: 'Mega Kuningan, Jakarta Selatan',
+  blocks: [
+    { isPhoto: true, frame: 'card', name: 'jumat-berkah-14agu-cover', w: 720, h: 900, maxW: '640px', eager: true,
+      alt: 'Relawan mengacungkan jempol di samping pengemudi ojek daring yang memegang paket makanan',
+      caption: 'Seorang pengemudi ojek daring menerima paketnya, relawan mengacungkan jempol di sampingnya.' },
+    P('Jumat, 14 Agustus 2026, Jumat Berkah kembali berkeliling di sekitar Mega Kuningan, Jakarta Selatan.'),
+    { isPhoto: true, frame: 'arch', name: 'jumat-berkah-14agu-mengisi', w: 600, h: 750, maxW: '420px',
+      alt: 'Relawan mengisi nasi kotak dengan lauk sebelum berangkat',
+      caption: 'Nasi kotak diisi satu per satu sebelum berangkat.' },
+    P('Paket-paket itu sampai ke pengemudi ojek daring di pinggir jalan, juru parkir, petugas keamanan di pos jaganya, petugas kebersihan, dan seorang pekerja yang sedang mengecat tembok.'),
+    { isPhoto: true, frame: 'card', name: 'jumat-berkah-14agu-ojol', w: 600, h: 750, maxW: '460px',
+      alt: 'Pengemudi ojek daring berjaket hijau tersenyum saat menerima paket makanan',
+      caption: 'Seorang pengemudi ojek daring tersenyum saat paketnya diserahkan.' },
+    P('Jumat Berkah berjalan dua pekan sekali sejak Agustus 2025. Terima kasih untuk setiap nama yang ikut menitipkan rezekinya pekan ini. Sampai jumpa di Jumat Berkah berikutnya. Salam.')
+  ],
+  docs: [
+    { name: 'jumat-berkah-14agu-dok-1', w: 480, h: 640, alt: 'Nasi putih ditata di dalam kotak sebelum diberi lauk' },
+    { name: 'jumat-berkah-14agu-dok-2', w: 480, h: 640, alt: 'Lauk disiapkan di meja sebelum dikemas' },
+    { name: 'jumat-berkah-14agu-dok-3', w: 480, h: 640, alt: 'Relawan memasukkan lauk ke dalam nasi kotak' },
+    { name: 'jumat-berkah-14agu-dok-4', w: 480, h: 640, alt: 'Dua relawan mengemas paket makanan ke dalam kantong plastik' },
+    { name: 'jumat-berkah-14agu-dok-5', w: 480, h: 640, alt: 'Juru parkir berompi oranye tersenyum menerima paket makanan dari relawan' },
+    { name: 'jumat-berkah-14agu-dok-6', w: 480, h: 640, alt: 'Relawan menyerahkan paket makanan kepada pekerja yang sedang mengecat tembok' },
+    { name: 'jumat-berkah-14agu-dok-7', w: 480, h: 640, alt: 'Petugas keamanan tersenyum di pos jaganya' },
+    { name: 'jumat-berkah-14agu-dok-8', w: 480, h: 640, alt: 'Relawan menghampiri petugas kebersihan yang duduk di atas bak sampah' }
+  ]
+};
+
 // ------------------------------------------------------------ report index
 // `url` null  => no standalone page (report still listed in the archive).
 // Ordered newest first, matching the source's date sort.
@@ -373,6 +475,30 @@ export const jb16oktArticle = {
 // entries that have one); leave it out while a report has no final count.
 
 export const REPORTS = [
+  {
+    slug: 'jumat-berkah-13-november-2026', url: '/laporan/jumat-berkah-13-november-2026',
+    date: '2026-11-13', category: 'Jumat Berkah', log: { lokasi: 'Mega Kuningan', jumlah: '13 paket' },
+    title: 'Lihat Laporan: Jumat Berkah 13 November 2026',
+    heading: 'Jumat Berkah Singgah dari Perkantoran hingga di Jalanan Mega Kuningan',
+    seoTitle: 'Jumat Berkah 13 November 2026 — Laporan | Cinta Foundation',
+    seoDescription: 'Laporan Jumat Berkah 13 November 2026: 13 paket nasi kotak dibagikan kepada petugas kebersihan, pedagang keliling, pengamen, dan sopir galon di sekitar Mega Kuningan, Jakarta Selatan.',
+    preview: 'Laporan Jumat Berkah 13 November 2026: 13 paket nasi kotak dibagikan kepada petugas kebersihan, pedagang keliling, pengamen, dan sopir galon di sekitar Mega Kuningan, Jakarta Selatan.',
+    image: 'jumat-berkah-13nov-og.jpg', ogImage: 'jumat-berkah-13nov-og.jpg', focus: 'center',
+    alt: 'Seorang pengamen bertopi tersenyum memegang gitar dan paket makanan di depan pagar',
+    full: true, article: 'jb13nov'
+  },
+  {
+    slug: 'jumat-berkah-30-oktober-2026', url: '/laporan/jumat-berkah-30-oktober-2026',
+    date: '2026-10-30', category: 'Jumat Berkah', log: { lokasi: 'Mega Kuningan', jumlah: '13 paket' },
+    title: 'Lihat Laporan: Jumat Berkah 30 Oktober 2026',
+    heading: 'Jumat Berkah Mengantar Sarapan dari Petugas hingga Penjual di Sekitar Mega Kuningan',
+    seoTitle: 'Jumat Berkah 30 Oktober 2026 — Laporan | Cinta Foundation',
+    seoDescription: 'Laporan Jumat Berkah 30 Oktober 2026: 13 paket nasi ayam goreng dengan sayur lalapan dan air mineral dibagikan di sekitar Mega Kuningan, Jakarta Selatan.',
+    preview: 'Laporan Jumat Berkah 30 Oktober 2026: 13 paket nasi ayam goreng dengan sayur lalapan dan air mineral dibagikan di sekitar Mega Kuningan, Jakarta Selatan.',
+    image: 'jumat-berkah-30okt-og.jpg', ogImage: 'jumat-berkah-30okt-og.jpg', focus: 'center',
+    alt: 'Seorang ibu bertopi merah muda tersenyum di samping sepedanya saat menerima paket makanan dari relawan',
+    full: true, article: 'jb30okt'
+  },
   {
     slug: 'jumat-berkah-16-oktober-2026', url: '/laporan/jumat-berkah-16-oktober-2026',
     date: '2026-10-16', category: 'Jumat Berkah', log: { lokasi: 'Mega Kuningan', jumlah: '13 porsi' },
@@ -422,11 +548,16 @@ export const REPORTS = [
     full: true, article: 'jb28'
   },
   {
-    slug: 'jumat-berkah-14-agustus-2026', url: null,
+    slug: 'jumat-berkah-14-agustus-2026', url: '/laporan/jumat-berkah-14-agustus-2026',
     date: '2026-08-14', category: 'Jumat Berkah',
     title: 'Lihat Laporan: Jumat Berkah 14 Agustus 2026',
-    preview: 'Makanan dibawa dan dibagikan langsung kepada orang-orang yang kami temui di tengah aktivitas mereka. Seperti biasa, kami berusaha menjaga prosesnya tetap sederhana, hangat, dan tidak mengganggu keseharian penerima.',
-    image: '', focus: 'center', alt: '', full: false
+    heading: 'Jumat Berkah Menyapa Pengemudi Ojol hingga Satpam di Sekitar Mega Kuningan',
+    seoTitle: 'Jumat Berkah 14 Agustus 2026 — Laporan | Cinta Foundation',
+    seoDescription: 'Laporan Jumat Berkah 14 Agustus 2026: nasi kotak dibagikan kepada pengemudi ojek daring, juru parkir, petugas keamanan, dan pekerja di sekitar Mega Kuningan, Jakarta Selatan.',
+    preview: 'Laporan Jumat Berkah 14 Agustus 2026: nasi kotak dibagikan kepada pengemudi ojek daring, juru parkir, petugas keamanan, dan pekerja di sekitar Mega Kuningan, Jakarta Selatan.',
+    image: 'jumat-berkah-14agu-og.jpg', ogImage: 'jumat-berkah-14agu-og.jpg', focus: 'center',
+    alt: 'Relawan mengacungkan jempol di samping pengemudi ojek daring yang memegang paket makanan',
+    full: true, article: 'jb14agu'
   },
   {
     slug: 'jumat-berkah-31-juli-2026', url: '/laporan/jumat-berkah-31-juli-2026',
@@ -465,4 +596,4 @@ export const REPORTS = [
   }
 ];
 
-export const ARTICLES = { jb17: jbArticle, jb31: jb31Article, bb: bbArticle, jb28: jb28Article, jb18sep: jb18sepArticle, jb02okt: jb02oktArticle, jb16okt: jb16oktArticle };
+export const ARTICLES = { jb17: jbArticle, jb31: jb31Article, bb: bbArticle, jb28: jb28Article, jb18sep: jb18sepArticle, jb02okt: jb02oktArticle, jb16okt: jb16oktArticle, jb30okt: jb30oktArticle, jb13nov: jb13novArticle, jb14agu: jb14aguArticle };
